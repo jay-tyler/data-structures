@@ -7,3 +7,9 @@ def test_find():
     aBST = BST(20)
     assert aBST._find(5) == aBST.root
     assert aBST._find(101) == aBST.root
+
+
+def test_insert():
+    aBST = BST()
+    aBST.insert(1)
+    assert aBST.root.val == 1

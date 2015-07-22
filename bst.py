@@ -8,13 +8,26 @@ class Node(object):
 
 class BST(object):
     def __init__(self, val=None):
+        self.size = 0
+        self.balence = 0
         if val is not None:
             self.root = Node(val)
+            self.size += 1
         else:
             self.root = None
 
     def insert(self, val):
         """Insert val into BST if not present. Always returns None."""
+        if self.root is None:
+            self.root = Node(val)
+        else:
+            new_parent = self._find(val)
+            if new_parent.val > val:
+                new_parent.left = Node(val, new_parent)
+            elif new_parent.val < val:
+                new_parent.right = Node(val, new_parent)
+            else:
+                pass
 
     def contains(self, val):
         """Return True if val in BST. Else, return False."""
