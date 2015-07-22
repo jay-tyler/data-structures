@@ -39,15 +39,10 @@ class BST(object):
             if root.val > val:
                 if root.left is not None:
                     self._find(root.left, val)
-                else:
-                    break
             elif root.val < val:
                 if root.right is not None:
                     self._find(root.right, val)
-                else:
-                    break
-            else:
-                return node
+            return node
 
         if self.root is not None:
             return _look(self.root)
