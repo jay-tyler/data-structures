@@ -12,11 +12,11 @@ class Node(object):
 
 class BST(object):
     def __init__(self, val=None):
-        self.size = 0
+        self._size = 0
         self.balence = 0
+        self.root = None
         if val is not None:
-            self.root = Node(val)
-            self.size += 1
+            self.insert(val)
         else:
             self.root = None
 
@@ -24,12 +24,15 @@ class BST(object):
         """Insert val into BST if not present. Always returns None."""
         if self.root is None:
             self.root = Node(val)
+            self._size += 1
         else:
             new_parent = self._find(val)
             if new_parent.val > val:
                 new_parent.left = Node(val, new_parent)
+                self._size += 1
             elif new_parent.val < val:
                 new_parent.right = Node(val, new_parent)
+                self._size += 1
             else:
                 pass
 
@@ -39,7 +42,7 @@ class BST(object):
 
     def size(self):
         """Return int size of tree. Will return 0 if tree is empty."""
-        pass
+        return self._size
 
     def depth(self):
         """Return the int number of levels in the tree.
