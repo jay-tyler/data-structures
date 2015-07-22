@@ -62,10 +62,10 @@ class BST(object):
         def _look(node):
             if node.val > val:
                 if node.left is not None:
-                    self._find(node.left)
+                    return _look(node.left)
             elif node.val < val:
                 if node.right is not None:
-                    self._find(node.right)
+                    return _look(node.right)
             return node
 
         if self.root is not None:
