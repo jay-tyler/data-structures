@@ -1,3 +1,4 @@
+
 class Node(object):
         def __init__(self, val, parent=None, left=None, right=None):
             self.val = val
@@ -6,8 +7,7 @@ class Node(object):
             self.right = right
 
         def __repr__(self):
-            return ("Node({self.val}, parent={self.parent},"\
-                    "left={self.left}, right={self.right})".format(self=self))
+            return ("Node({self.val}, parent={self.parent})".format(self=self))
 
 
 class BST(object):
@@ -62,10 +62,10 @@ class BST(object):
         def _look(node):
             if node.val > val:
                 if node.left is not None:
-                    self._find(node.left)
+                    return _look(node.left)
             elif node.val < val:
                 if node.right is not None:
-                    self._find(node.right)
+                    return _look(node.right)
             return node
 
         if self.root is not None:
