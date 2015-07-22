@@ -12,11 +12,26 @@ class Node(object):
 
 class BST(object):
     def __init__(self, val=None):
-        self.root = Node(val)
+        self.size = 0
+        self.balence = 0
+        if val is not None:
+            self.root = Node(val)
+            self.size += 1
+        else:
+            self.root = None
 
     def insert(self, val):
         """Insert val into BST if not present. Always returns None."""
-        pass
+        if self.root is None:
+            self.root = Node(val)
+        else:
+            new_parent = self._find(val)
+            if new_parent.val > val:
+                new_parent.left = Node(val, new_parent)
+            elif new_parent.val < val:
+                new_parent.right = Node(val, new_parent)
+            else:
+                pass
 
     def contains(self, val):
         """Return True if val in BST. Else, return False."""
@@ -39,22 +54,24 @@ class BST(object):
         --Zero if tree is perfectly balanced"""
         pass
 
-    def _find(self, root, val):
+    def _find(self, val):
         """Return a tuple containing (node, side) with target val if it exists,
         otherwise return the would be parent and 1 if it is on the left, -1 if
         it is on the right, 0 if it is the root."""
 
         def _look(node):
-            if root.val > val:
-                if root.left is not None:
-                    self._find(root.left, val)
-            elif root.val < val:
-                if root.right is not None:
-                    self._find(root.right, val)
+            if node.val > val:
+                if node.left is not None:
+                    self._find(node.left)
+            elif node.val < val:
+                if node.right is not None:
+                    self._find(node.right)
             return node
 
         if self.root is not None:
             return _look(self.root)
+        else:
+            return None
 
 
 def test_helper():
