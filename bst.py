@@ -60,4 +60,16 @@ class BST(object):
 def test_helper():
     A = Node(5)
     B = Node(4, parent=A)
-    C = Node(6, parent=)
+    C = Node(6, parent=A)
+    D = Node(3, parent=B)
+    E = Node(2, parent=B)
+    F = Node(7, parent=C)
+
+    # Backrefs
+    A.left = B
+    A.right = C
+    B.left = D
+    B.right = E
+    C.right = F
+
+    return [A, B, C, D, E, F]
