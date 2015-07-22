@@ -36,12 +36,12 @@ class BST(object):
         it is on the right, 0 if it is the root."""
 
         def _look(node):
-            if root.val > val:
-                if root.left is not None:
-                    self._find(root.left, val)
-            elif root.val < val:
-                if root.right is not None:
-                    self._find(root.right, val)
+            if node.val > val:
+                if node.left is not None:
+                    self._find(node.left, val)
+            elif node.val < val:
+                if node.right is not None:
+                    self._find(node.right, val)
             return node
 
         if self.root is not None:
