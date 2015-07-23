@@ -1,3 +1,5 @@
+import random
+
 class Node(object):
         def __init__(self, val, parent=None, left=None, right=None):
             self.val = val
@@ -6,8 +8,35 @@ class Node(object):
             self.right = right
 
         def __repr__(self):
-            return ("Node({self.val},"\
-                    "left={self.left}, right={self.right})".format(self=self))
+            return ("Node({self.val}, parent={self.parent})".format(self=self))
+
+        def get_dot(self):
+            """return the tree with root 'self' as a dot graph for visualization"""
+            return "digraph G{\n%s}" % ("" if self.val is None else (
+                "\t%s;\n%s\n" % (
+                    self.val,
+                    "\n".join(self._get_dot())
+                )
+            ))
+
+        def _get_dot(self):
+            """recursively prepare a dot graph entry for this node."""
+            if self.left is not None:
+                yield "\t%s -> %s;" % (self.val, self.left.val)
+                for i in self.left._get_dot():
+                    yield i
+            elif self.right is not None:
+                r = random.randint(0, 1e9)
+                yield "\tnull%s [shape=point];" % r
+                yield "\t%s -> null%s;" % (self.val, r)
+            if self.right is not None:
+                yield "\t%s -> %s;" % (self.val, self.right.val)
+                for i in self.right._get_dot():
+                    yield i
+            elif self.left is not None:
+                r = random.randint(0, 1e9)
+                yield "\tnull%s [shape=point];" % r
+                yield "\t%s -> null%s;" % (self.val, r)
 
 
 class BST(object):
@@ -103,12 +132,12 @@ class BST(object):
 
 
 def test_helper():
-    A = Node(5)
+    A = Node(6)
     B = Node(4, parent=A)
-    C = Node(6, parent=A)
+    C = Node(7, parent=A)
     D = Node(3, parent=B)
-    E = Node(2, parent=B)
-    F = Node(7, parent=C)
+    E = Node(5, parent=B)
+    F = Node(8, parent=C)
 
     # Backrefs
     A.left = B
