@@ -78,12 +78,12 @@ class BST(object):
 
 
 def test_helper():
-    A = Node(5)
+    A = Node(6)
     B = Node(4, parent=A)
-    C = Node(6, parent=A)
+    C = Node(7, parent=A)
     D = Node(3, parent=B)
-    E = Node(2, parent=B)
-    F = Node(7, parent=C)
+    E = Node(5, parent=B)
+    F = Node(8, parent=C)
 
     # Backrefs
     A.left = B
