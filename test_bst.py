@@ -71,14 +71,25 @@ def test_balance():
     aBST = BST()
     assert aBST.balance() == 0
     aBST.insert(4)
+
     assert aBST.balance() == 0
     aBST.insert(2)
     assert aBST.balance() == 1
     aBST.insert(6)
     assert aBST.balance() == 0
-    aBST.insert(5)
-    print ')))))))))))))))))))))))))))))))'
+    aBST.insert(3)
+    assert aBST.balance() == 1
+    aBST.insert(7)
     assert aBST.balance() == 0
+    aBST.insert(8)
+    assert aBST.balance() == -1
+    aBST.insert(9)
+    assert aBST.balance() == -2
+    aBST.insert(10)
+    assert aBST.balance() == -3
+    aBST.insert(11)
+
+
     for x in range(2000):
         aBST.insert(uuid4())
     assert aBST.balance != 0

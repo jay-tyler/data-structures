@@ -56,7 +56,6 @@ class BST(object):
         --Zero if tree is perfectly balanced"""
         if self.root is not None:
             l, r = self.lr_levels()
-            print l, r
             return l - r
         else:
             return 0
@@ -81,16 +80,17 @@ class BST(object):
             return None
 
     def lr_levels(self):
+        # import pdb; pdb.set_trace()
         def _levels(node):
-            x, y = 0, 0
+            l, r = 0, 0
+            if node.left is not None:
+                l = _levels(node.left)
             if node.right is not None:
-                x = _levels(node.right)
-            if node.right is not None:
-                y = _levels(node.right)
-            if x > y:
-                return x + 1
+                r = _levels(node.right)
+            if l > r:
+                return l + 1
             else:
-                return y + 1
+                return r + 1
 
         if self.root is None:
             return None
