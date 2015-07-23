@@ -67,7 +67,14 @@ class BST(object):
 
     def contains(self, val):
         """Return True if val in BST. Else, return False."""
-        pass
+        checkdis = self._find(val)
+        try:
+            if checkdis.val == val:
+                return True
+            else:
+                return False
+        except AttributeError:
+            return False
 
     def size(self):
         """Return int size of tree. Will return 0 if tree is empty."""
@@ -114,7 +121,6 @@ class BST(object):
             return None
 
     def lr_levels(self):
-        # import pdb; pdb.set_trace()
         def _levels(node):
             l, r = 0, 0
             if node.left is not None:
@@ -131,21 +137,3 @@ class BST(object):
         if self.root.right is not None:
             w_right = _levels(self.root.right)
         return w_left, w_right
-
-
-def test_helper():
-    A = Node(6)
-    B = Node(4, parent=A)
-    C = Node(7, parent=A)
-    D = Node(3, parent=B)
-    E = Node(5, parent=B)
-    F = Node(8, parent=C)
-
-    # Backrefs
-    A.left = B
-    A.right = C
-    B.left = D
-    B.right = E
-    C.right = F
-
-    return [A, B, C, D, E, F]

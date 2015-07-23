@@ -1,6 +1,27 @@
 import pytest
-from bst import BST
+from bst import BST, Node
 from uuid import uuid4
+
+
+@pytest.fixture
+def filled_tree():
+    A = Node(6)
+    B = Node(4, parent=A)
+    C = Node(7, parent=A)
+    D = Node(3, parent=B)
+    E = Node(5, parent=B)
+    F = Node(8, parent=C)
+
+    # Backrefs
+    A.left = B
+    A.right = C
+    B.left = D
+    B.right = E
+    C.right = F
+
+    a = BST()
+    a.root = A
+    return a
 
 
 def test_find():
@@ -130,3 +151,16 @@ def test_depth():
     assert aBST.depth() == 6
     aBST.insert(11)
     assert aBST.depth() == 7
+
+
+def test_contains(filled_tree):
+    assert filled_tree.contains(6) is True
+    assert filled_tree.contains(4) is True
+    assert filled_tree.contains(7) is True
+    assert filled_tree.contains(3) is True
+    assert filled_tree.contains(5) is True
+    assert filled_tree.contains(8) is True
+    assert filled_tree.contains(0) is False
+    assert filled_tree.contains(12) is False
+    assert filled_tree.contains(7.5) is False
+    assert filled_tree.contains(2) is False
