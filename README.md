@@ -89,3 +89,19 @@ See the doc strings for additional implementation details.
 
 [![Build Status](https://travis-ci.org/jonathanstallings/data-structures.svg?branch=master)](https://travis-ci.org/jonathanstallings/data-structures)
 
+## BST -- Binary Search Tree
+This is a linked-list like tree structure. The Node class implementation
+includes a bi-directional relationship between parent and child nodes; the
+BST itself naively has knowledge of only the root node directly. Many of the
+available methods, including size, depth, balance will traverse the entire tree
+and will have O(n) complexity. Insert() and contains() leverage tree sorting 
+to execute with O(log n) complexity.
+
+Available methods include:
+* insert(val)
+* size()
+* contains()
+* balance()
+* depth()
+
+See the doc strings for additional implementation details.
