@@ -1,5 +1,6 @@
 import random
 
+
 class Node(object):
         def __init__(self, val, parent=None, left=None, right=None):
             self.val = val
@@ -75,7 +76,11 @@ class BST(object):
     def depth(self):
         """Return the int number of levels in the tree.
         Return 0 if tree is empty."""
-        pass
+        if self.root is not None:
+            l, r = self.lr_levels()
+            return max([l, r]) + 1
+        else:
+            return 0
 
     def balance(self):
         """Return the difference between the number of nodes on the left with
@@ -116,10 +121,7 @@ class BST(object):
                 l = _levels(node.left)
             if node.right is not None:
                 r = _levels(node.right)
-            if l > r:
-                return l + 1
-            else:
-                return r + 1
+            return max([l, r]) + 1
 
         if self.root is None:
             return None

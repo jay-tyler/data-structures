@@ -1,6 +1,5 @@
 import pytest
 from bst import BST
-import random
 from uuid import uuid4
 
 
@@ -71,7 +70,6 @@ def test_balance():
     aBST = BST()
     assert aBST.balance() == 0
     aBST.insert(4)
-
     assert aBST.balance() == 0
     aBST.insert(2)
     assert aBST.balance() == 1
@@ -88,8 +86,6 @@ def test_balance():
     aBST.insert(10)
     assert aBST.balance() == -3
     aBST.insert(11)
-
-
     for x in range(2000):
         aBST.insert(uuid4())
     assert aBST.balance != 0
@@ -111,3 +107,26 @@ def test_lr_levels():
     for x in range(20):
         aBST.insert(x)
     assert aBST.lr_levels() == (0, 19)
+
+
+def test_depth():
+    aBST = BST()
+    assert aBST.depth() == 0
+    aBST.insert(4)
+    assert aBST.depth() == 1
+    aBST.insert(2)
+    assert aBST.depth() == 2
+    aBST.insert(6)
+    assert aBST.depth() == 2
+    aBST.insert(3)
+    assert aBST.depth() == 3
+    aBST.insert(7)
+    assert aBST.depth() == 3
+    aBST.insert(8)
+    assert aBST.depth() == 4
+    aBST.insert(9)
+    assert aBST.depth() == 5
+    aBST.insert(10)
+    assert aBST.depth() == 6
+    aBST.insert(11)
+    assert aBST.depth() == 7
