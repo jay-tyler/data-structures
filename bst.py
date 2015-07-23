@@ -13,7 +13,6 @@ class Node(object):
 class BST(object):
     def __init__(self, val=None):
         self._size = 0
-        self.balence = 0
         self.root = None
         if val is not None:
             self.insert(val)
@@ -34,7 +33,7 @@ class BST(object):
                 new_parent.right = Node(val, new_parent)
                 self._size += 1
             else:
-                pass
+                return
 
     def contains(self, val):
         """Return True if val in BST. Else, return False."""
@@ -55,7 +54,12 @@ class BST(object):
         --Negative if more on right
         --Positive if more on left
         --Zero if tree is perfectly balanced"""
-        pass
+        if self.root is not None:
+            l, r = self.lr_levels()
+            print l, r
+            return l - r
+        else:
+            return 0
 
     def _find(self, val):
         """Return a tuple containing (node, side) with target val if it exists,
@@ -75,6 +79,27 @@ class BST(object):
             return _look(self.root)
         else:
             return None
+
+    def lr_levels(self):
+        def _levels(node):
+            x, y = 0, 0
+            if node.right is not None:
+                x = _levels(node.right)
+            if node.right is not None:
+                y = _levels(node.right)
+            if x > y:
+                return x + 1
+            else:
+                return y + 1
+
+        if self.root is None:
+            return None
+        w_left, w_right = 0, 0
+        if self.root.left is not None:
+            w_left = _levels(self.root.left)
+        if self.root.right is not None:
+            w_right = _levels(self.root.right)
+        return w_left, w_right
 
 
 def test_helper():
