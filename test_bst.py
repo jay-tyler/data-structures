@@ -114,20 +114,20 @@ def test_balance():
 
 def test_lr_levels():
     aBST = BST()
-    assert aBST.lr_levels() == None
+    assert aBST._lr_levels() == None
     aBST.insert(4)
-    assert aBST.lr_levels() == (0, 0)
+    assert aBST._lr_levels() == (0, 0)
     aBST.insert(2)
     aBST.insert(6)
     aBST.insert(1)
     aBST.insert(3)
     aBST.insert(5)
     aBST.insert(7)
-    assert aBST.lr_levels() == (2, 2)
+    assert aBST._lr_levels() == (2, 2)
     aBST = BST()
     for x in range(20):
         aBST.insert(x)
-    assert aBST.lr_levels() == (0, 19)
+    assert aBST._lr_levels() == (0, 19)
 
 
 def test_depth():

@@ -1,4 +1,5 @@
 import random
+from timeit import default_timer
 
 
 class Node(object):
@@ -84,7 +85,7 @@ class BST(object):
         """Return the int number of levels in the tree.
         Return 0 if tree is empty."""
         if self.root is not None:
-            l, r = self.lr_levels()
+            l, r = self._lr_levels()
             return max([l, r]) + 1
         else:
             return 0
@@ -96,7 +97,7 @@ class BST(object):
         --Positive if more on left
         --Zero if tree is perfectly balanced"""
         if self.root is not None:
-            l, r = self.lr_levels()
+            l, r = self._lr_levels()
             return l - r
         else:
             return 0
@@ -120,7 +121,7 @@ class BST(object):
         else:
             return None
 
-    def lr_levels(self):
+    def _lr_levels(self):
         def _levels(node):
             l, r = 0, 0
             if node.left is not None:
@@ -137,3 +138,42 @@ class BST(object):
         if self.root.right is not None:
             w_right = _levels(self.root.right)
         return w_left, w_right
+
+
+if __name__ == '__main__':
+    # Worst case senerio, the BST is completely unbalanced:
+    # either:
+    # --the root is the smallest item and you are searching
+    # for an item bigger than the biggest item in the BST, or
+    # --the root is the biggest item and you are searching
+    # for an item smaller than the smallest item in the list.
+    BST1 = BST()
+    for x in range(51):
+        BST1.insert(x)
+    start = default_timer()
+    for x in range(10000):
+        BST1.contains(51)
+    print BST1.contains(51)
+    end = default_timer()
+    print str(end - start) + "<-- Quite a while!"
+    # Best case senario, the item you are looking for is the item at root.
+    BST2 = BST(1)
+    start = default_timer()
+    for x in range(10000):
+        BST2.contains(1)
+    print BST2.contains(1)
+    end = default_timer()
+    print str(end - start) + "<-- Quite fast!"
+    # Or that the tree is well balanced.
+    BST3 = BST()
+    l = [50, 25, 75, 12, 37, 63, 87, 6, 18, 31, 43, 57, 69, 81, 93, 3, 9, 15,
+         21, 28, 34, 40, 46, 54, 60, 66, 72, 78, 84, 90, 96, 1, 4, 8, 10, 14,
+         6, 20, 22, 27, 29, 39, 41, 59, 61, 65, 67, 77, 79, 89, 91]
+    for x in l:
+        BST3.insert(x)
+    start = default_timer()
+    for x in range(10000):
+        BST2.contains(101)
+    print BST3.contains(101)
+    end = default_timer()
+    print str(end - start) + "<-- Fast Enough!"
