@@ -1,5 +1,7 @@
 import pytest
 from bst import BST
+import random
+from uuid import uuid4
 
 
 def test_find():
@@ -47,4 +49,54 @@ def test_repr():
     aBST.insert(4)
     aBST.insert(2)
     aBST.insert(6)
-    print aBST.root.__repr__()
+
+
+def test_size():
+    aBST = BST()
+    assert aBST.size() == 0
+    aBST.insert("Jason")
+    assert aBST.size() == 1
+    aBST.insert("Tyler")
+    assert aBST.size() == 2
+    aBST.insert("I cant use Tyler again")
+    assert aBST.size() == 3
+    aBST.insert("Peek")
+    assert aBST.size() == 4
+    for x in range(2000):
+        aBST.insert(uuid4())
+    assert aBST.size() == 2004
+
+
+def test_balance():
+    aBST = BST()
+    assert aBST.balance() == 0
+    aBST.insert(4)
+    assert aBST.balance() == 0
+    aBST.insert(2)
+    assert aBST.balance() == 1
+    aBST.insert(6)
+    assert aBST.balance() == 0
+    aBST.insert(5)
+    print ')))))))))))))))))))))))))))))))'
+    assert aBST.balance() == 0
+    for x in range(2000):
+        aBST.insert(uuid4())
+    assert aBST.balance != 0
+
+
+def test_lr_levels():
+    aBST = BST()
+    assert aBST.lr_levels() == None
+    aBST.insert(4)
+    assert aBST.lr_levels() == (0, 0)
+    aBST.insert(2)
+    aBST.insert(6)
+    aBST.insert(1)
+    aBST.insert(3)
+    aBST.insert(5)
+    aBST.insert(7)
+    assert aBST.lr_levels() == (2, 2)
+    aBST = BST()
+    for x in range(20):
+        aBST.insert(x)
+    assert aBST.lr_levels() == (0, 19)
