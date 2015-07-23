@@ -1,5 +1,6 @@
 import random
 
+
 class Node(object):
         def __init__(self, val, parent=None, left=None, right=None):
             self.val = val
@@ -66,7 +67,14 @@ class BST(object):
 
     def contains(self, val):
         """Return True if val in BST. Else, return False."""
-        pass
+        checkdis = self._find(val)
+        try:
+            if checkdis.val == val:
+                return True
+            else:
+                return False
+        except AttributeError:
+            return False
 
     def size(self):
         """Return int size of tree. Will return 0 if tree is empty."""
@@ -114,8 +122,8 @@ class BST(object):
             x, y = 0, 0
             if node.right is not None:
                 x = _levels(node.right)
-            if node.right is not None:
-                y = _levels(node.right)
+            if node.left is not None:
+                y = _levels(node.left)
             if x > y:
                 return x + 1
             else:
