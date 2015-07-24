@@ -139,6 +139,26 @@ class BST(object):
             w_right = _levels(self.root.right)
         return w_left, w_right
 
+    def in_order(self):
+        """Return a generator that will return the values in the
+        tree using in-order traversal, one at a time."""
+        pass
+
+    def pre_order(self):
+        """Return a generator that will return the values in the
+        tree using pre-order traversal, one at a time."""
+        pass
+
+    def post_order(self):
+        """Return a generator that will return the values in the
+        tree using post_order traversal, one at a time."""
+        pass
+
+    def breadth_first(self):
+        """Return a generator that will return the values in the
+        tree using breadth-first traversal, one at a time."""
+        pass
+
 
 if __name__ == '__main__':
     # Worst case senerio, the BST is completely unbalanced:
