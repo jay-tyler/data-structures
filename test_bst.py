@@ -6,21 +6,26 @@ from uuid import uuid4
 @pytest.fixture
 def filled_tree():
     A = Node(6)
-    B = Node(4, parent=A)
-    C = Node(7, parent=A)
-    D = Node(3, parent=B)
-    E = Node(5, parent=B)
-    F = Node(8, parent=C)
+    # B = Node(4, parent=A)
+    # C = Node(7, parent=A)
+    # D = Node(3, parent=B)
+    # E = Node(5, parent=B)
+    # F = Node(8, parent=C)
 
-    # Backrefs
-    A.left = B
-    A.right = C
-    B.left = D
-    B.right = E
-    C.right = F
+    # # Backrefs
+    # A.left = B
+    # A.right = C
+    # B.left = D
+    # B.right = E
+    # C.right = F
 
     a = BST()
     a.root = A
+    A.left = 4
+    A.right = 7
+    A.left.left = 3
+    A.left.right = 5
+    A.right.right = 8
     return a
 
 
@@ -33,13 +38,10 @@ def test_find():
 
 def test_insert():
     aBST = BST()
-    aBST.insert(4)
-    aBST.insert(2)
-    aBST.insert(6)
-    aBST.insert(1)
-    aBST.insert(3)
-    aBST.insert(5)
-    aBST.insert(7)
+    nums = [4, 2, 6, 1, 3, 5, 7]
+    for num in nums:
+        aBST.insert(num)
+
     assert aBST.root.val == 4
     assert aBST.root.parent is None
     assert aBST.root.left.val == 2

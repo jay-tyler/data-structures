@@ -6,8 +6,24 @@ class Node(object):
         def __init__(self, val, parent=None, left=None, right=None):
             self.val = val
             self.parent = parent
-            self.left = left
-            self.right = right
+            self._left = left
+            self._right = right
+
+        @property
+        def left(self):
+            return self._left
+
+        @property
+        def right(self):
+            return self._right
+
+        @left.setter
+        def left(self, val):
+            self._left = Node(val, self)
+
+        @right.setter
+        def right(self, val):
+            self._right = Node(val, self)
 
         def __repr__(self):
             return ("Node({self.val}, parent={self.parent})".format(self=self))
@@ -47,24 +63,20 @@ class BST(object):
         self.root = None
         if val is not None:
             self.insert(val)
-        else:
-            self.root = None
 
     def insert(self, val):
         """Insert val into BST if not present. Always returns None."""
         if self.root is None:
             self.root = Node(val)
-            self._size += 1
         else:
             new_parent = self._find(val)
             if new_parent.val > val:
-                new_parent.left = Node(val, new_parent)
-                self._size += 1
+                new_parent.left = val
             elif new_parent.val < val:
-                new_parent.right = Node(val, new_parent)
-                self._size += 1
+                new_parent.right = val
             else:
                 return
+        self._size += 1
 
     def contains(self, val):
         """Return True if val in BST. Else, return False."""
