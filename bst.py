@@ -82,10 +82,7 @@ class BST(object):
         """Return True if val in BST. Else, return False."""
         checkdis = self._find(val)
         try:
-            if checkdis.val == val:
-                return True
-            else:
-                return False
+            return checkdis.val == val
         except AttributeError:
             return False
 
@@ -118,6 +115,9 @@ class BST(object):
         """Return a tuple containing (node, side) with target val if it exists,
         otherwise return the would be parent and 1 if it is on the left, -1 if
         it is on the right, 0 if it is the root."""
+        # Can't remember if we changed our minds or forgot to implement this.
+        """Return the node with target val if it exists, otherwise return the
+        would be parent."""
 
         def _look(node):
             if node.val > val:
