@@ -199,14 +199,15 @@ class BST(object):
         tree using breadth-first traversal, one at a time."""
 
         def go(n):
-            todo = Queue([self.root])
-            while len(todo) > 0:
-                n = todo.dequeue()
-                yield n
-                if n.left is not None:
-                    todo.enqueue(n.left)
-                if n.right is not None:
-                    todo.enqueue(n.right)
+            if self.root is not None:
+                todo = Queue([self.root])
+                while len(todo) > 0:
+                    n = todo.dequeue()
+                    yield n
+                    if n.left is not None:
+                        todo.enqueue(n.left)
+                    if n.right is not None:
+                        todo.enqueue(n.right)
         for node in go(self.root):
             yield node
 
