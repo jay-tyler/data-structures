@@ -35,6 +35,7 @@ greatest values will be sorted to the top.
 Available methods include:
 * pop()
 * push()
+
 See the doc strings for implementation details.
 
 ##PriorityQ
@@ -46,6 +47,7 @@ Available methods include:
 * insert(item)
 * pop()
 * peek()
+
 See the doc strings for implementation details.
 
 Instantiation of a PriorityQ takes an iterable which may contain (value, priority) iterables,
@@ -108,4 +110,4 @@ Available methods include:
 
 See the doc strings for additional implementation details.
 
-[![Build Status](https://travis-ci.org/tpeek/data-structures-1.svg?branch=master)](https://travis-ci.org/jonathanstallings/data-structures)
+[![Build Status](https://travis-ci.org/tpeek/data-structures-1.svg?branch=master)](https://travis-ci.org/tpeek/data-structures-1)
