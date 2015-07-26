@@ -1,5 +1,6 @@
 import random
 from timeit import default_timer
+from queue import Queue
 
 
 class Node(object):
@@ -196,8 +197,18 @@ class BST(object):
     def breadth_first(self):
         """Return a generator that will return the values in the
         tree using breadth-first traversal, one at a time."""
-        pass
 
+        def go(n):
+            todo = Queue([self.root])
+            while len(todo) > 0:
+                n = todo.dequeue()
+                yield n
+                if n.left is not None:
+                    todo.enqueue(n.left)
+                if n.right is not None:
+                    todo.enqueue(n.right)
+        for node in go(self.root):
+            yield node
 
 if __name__ == '__main__':
     # Worst case senerio, the BST is completely unbalanced:
