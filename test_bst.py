@@ -178,3 +178,6 @@ def test_in_order(filled_tree):
 
 def test_post_order(filled_tree):
     assert list(filled_tree.post_order()) == [3, 5, 4, 8, 7, 6]
+
+def test_breadth_first(filled_tree):
+    assert list(filled_tree.breadth_first()) == [6, 4, 7, 3, 5, 8]

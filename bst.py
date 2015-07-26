@@ -209,7 +209,7 @@ class BST(object):
                     if n.right is not None:
                         todo.enqueue(n.right)
         for node in go(self.root):
-            yield node
+            yield node.val
 
 if __name__ == '__main__':
     # Worst case senerio, the BST is completely unbalanced:
