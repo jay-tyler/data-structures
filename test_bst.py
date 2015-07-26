@@ -13,6 +13,7 @@ def filled_tree():
     A.left.left = 3
     A.left.right = 5
     A.right.right = 8
+    a._size = 6
     return a
 
 
@@ -28,50 +29,41 @@ def test_insert():
     nums = [4, 2, 6, 1, 3, 5, 7]
     for num in nums:
         aBST.insert(num)
-    assert aBST.root.val == 4
-    assert aBST.root.parent is None
-    assert aBST.root.left.val == 2
-    assert aBST.root.left.parent == aBST.root
-    assert aBST.root.right.val == 6
-    assert aBST.root.right.parent == aBST.root
-    assert aBST.root.left.left.val == 1
-    assert aBST.root.left.left.parent == aBST.root.left
-    assert aBST.root.left.right.val == 3
-    assert aBST.root.left.right.parent == aBST.root.left
-    assert aBST.root.right.left.val == 5
-    assert aBST.root.right.left.parent == aBST.root.right
-    assert aBST.root.right.right.val == 7
-    assert aBST.root.right.right.parent == aBST.root.right
+    r = aBST.root
+    nodes = [r, r.left, r.right, r.left.left, r.left.right, r.right.left,
+             r.right.right]
+    parent_vals = [None, 4, 4, 2, 2, 6, 6]
+    left_child_vals = [2, 1, 5, None, None, None, None]
+    right_child_vals = [6, 3, 7, None, None, None, None]
+    for node, self_val, p_val, lc_val, rc_val in zip(nodes, nums,
+                                                     parent_vals,
+                                                     left_child_vals,
+                                                     right_child_vals):
+        assert node.val == self_val
+        if node.parent is not None:
+            assert node.parent.val == p_val
+        if node.left is not None:
+            assert node.left.val == lc_val
+        if node.right is not None:
+            assert node.right.val == rc_val
 
 
-def test_val_exists():
-    aBST = BST()
-    aBST.insert(2)
-    aBST.insert(2)
-    assert aBST.root.left is None
-    assert aBST.root.right is None
-    assert aBST.size == 1
-    aBST.insert(1)
-    aBST.insert(3)
-    aBST.insert(1)
-    aBST.insert(3)
-    assert aBST.size == 3
+def test_val_exists(filled_tree):
+    for num in [3, 4, 5, 6, 7, 8]:
+        filled_tree.insert(num)
+        assert filled_tree.size == 6
 
 
 def test_size():
     aBST = BST()
     assert aBST.size == 0
-    aBST.insert("Jason")
-    assert aBST.size == 1
-    aBST.insert("Tyler")
-    assert aBST.size == 2
-    aBST.insert("I cant use Tyler again")
-    assert aBST.size == 3
-    aBST.insert("Peek")
-    assert aBST.size == 4
+    for num, size in zip([6, 2, 8, 4, 1000, -111],
+                         [1, 2, 3, 4, 5, 6]):
+        aBST.insert(num)
+        assert aBST.size == size
     for x in range(2000):
         aBST.insert(uuid4())
-    assert aBST.size == 2004
+    assert aBST.size == 2006
 
 
 def test_balance():
@@ -86,15 +78,11 @@ def test_balance():
 def test_lr_levels():
     aBST = BST()
     assert aBST._lr_levels() == None
-    aBST.insert(4)
-    assert aBST._lr_levels() == (0, 0)
-    aBST.insert(2)
-    aBST.insert(6)
-    aBST.insert(1)
-    aBST.insert(3)
-    aBST.insert(5)
-    aBST.insert(7)
-    assert aBST._lr_levels() == (2, 2)
+    for num, level in zip([4, 2, 6, 1, 3, 5, 7],
+                          [(0, 0), (1, 0), (1, 1),
+                          (2, 1), (2, 1), (2, 2), (2, 2)]):
+        aBST.insert(num)
+        assert aBST._lr_levels() == level
     aBST = BST()
     for x in range(20):
         aBST.insert(x)
@@ -104,37 +92,17 @@ def test_lr_levels():
 def test_depth():
     aBST = BST()
     assert aBST.depth() == 0
-    aBST.insert(4)
-    assert aBST.depth() == 1
-    aBST.insert(2)
-    assert aBST.depth() == 2
-    aBST.insert(6)
-    assert aBST.depth() == 2
-    aBST.insert(3)
-    assert aBST.depth() == 3
-    aBST.insert(7)
-    assert aBST.depth() == 3
-    aBST.insert(8)
-    assert aBST.depth() == 4
-    aBST.insert(9)
-    assert aBST.depth() == 5
-    aBST.insert(10)
-    assert aBST.depth() == 6
-    aBST.insert(11)
-    assert aBST.depth() == 7
+    for num, depth in zip([4, 2, 6, 3, 7, 8, 9, 10, 11],
+                          [1, 2, 2, 3, 3, 4, 5,  6,  7]):
+        aBST.insert(num)
+        assert aBST.depth() == depth
 
 
 def test_contains(filled_tree):
-    assert filled_tree.contains(6) is True
-    assert filled_tree.contains(4) is True
-    assert filled_tree.contains(7) is True
-    assert filled_tree.contains(3) is True
-    assert filled_tree.contains(5) is True
-    assert filled_tree.contains(8) is True
-    assert filled_tree.contains(0) is False
-    assert filled_tree.contains(12) is False
-    assert filled_tree.contains(7.5) is False
-    assert filled_tree.contains(2) is False
+    t, f = True, False
+    for num, valid in zip([6, 4, 7, 3, 5, 8, 0, 12, 7.5, 2],
+                          [t, t, t, t, t, t, f,  f,   f, f]):
+        assert filled_tree.contains(num) is valid
 
 
 def test_pre_order(filled_tree):
