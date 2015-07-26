@@ -108,8 +108,7 @@ class BST(object):
         if self.root is not None:
             l, r = self._lr_levels()
             return l - r
-        else:
-            return 0
+        return 0
 
     def _find(self, val):
         """Return a tuple containing (node, side) with target val if it exists,
@@ -207,32 +206,47 @@ if __name__ == '__main__':
     # --the root is the biggest item and you are searching
     # for an item smaller than the smallest item in the list.
     BST1 = BST()
-    for x in range(51):
+    for x in range(995):
         BST1.insert(x)
     start = default_timer()
-    for x in range(10000):
-        BST1.contains(51)
-    print BST1.contains(51)
+    for x in range(500):
+        BST1.contains(1000)
+    print "Search for the value 1000 in a completely unbalanced tree of 995"
+    print "nodes. Repeat 1000 times."
     end = default_timer()
-    print str(end - start) + "<-- Quite a while!"
+    print str(end - start) + "<-- Quite a while!\n"
     # Best case senario, the item you are looking for is the item at root.
     BST2 = BST(1)
     start = default_timer()
-    for x in range(10000):
+    for x in range(100000):
         BST2.contains(1)
-    print BST2.contains(1)
+    print "Search for the value 1 in a tree that has the value 1 at its root."
+    print "Repeat 100,000 times"
     end = default_timer()
-    print str(end - start) + "<-- Quite fast!"
+    print str(end - start) + "<-- Quite fast!\n"
     # Or that the tree is well balanced.
+
+    def bal_tree(nums, start, end):
+        if start > end:
+            return None
+        midpt = start + (end - start)//2
+        BST3.insert(nums[midpt])
+        bal_tree(nums, start, midpt-1)
+        bal_tree(nums, midpt+1, end)
+
     BST3 = BST()
-    l = [50, 25, 75, 12, 37, 63, 87, 6, 18, 31, 43, 57, 69, 81, 93, 3, 9, 15,
-         21, 28, 34, 40, 46, 54, 60, 66, 72, 78, 84, 90, 96, 1, 4, 8, 10, 14,
-         6, 20, 22, 27, 29, 39, 41, 59, 61, 65, 67, 77, 79, 89, 91]
-    for x in l:
-        BST3.insert(x)
+    nums = range(1, 400065)
+    print "Creating huge binary search tree, please wait..."
+    bal_tree(nums, 0, len(nums)-1)
+
     start = default_timer()
-    for x in range(10000):
-        BST2.contains(101)
-    print BST3.contains(101)
+    for x in range(250000):
+        BST2.contains(500000)
+    print "Search for the value 500,000 in a well balanced tree of 400,065"
+    print "nodes. Repeat 250,000 times"
     end = default_timer()
-    print str(end - start) + "<-- Fast Enough!"
+    print str(end - start) + "<-- Fast Enough!\n"
+
+    print "A well balanced tree with over 400,000 nodes, being searched"
+    print "250,000 times will still finish before an unbalanced tree"
+    print "with only 1,000 nodes being searched 500 times."
