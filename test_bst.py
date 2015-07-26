@@ -169,15 +169,24 @@ def test_contains(filled_tree):
 
 
 def test_pre_order(filled_tree):
+    assert list(BST().pre_order()) == []
+    assert list(BST(1).pre_order()) == [1]
     assert list(filled_tree.pre_order()) == [6, 4, 3, 5, 7, 8]
 
 
 def test_in_order(filled_tree):
+    assert list(BST().in_order()) == []
+    assert list(BST(1).in_order()) == [1]
     assert list(filled_tree.in_order()) == [3, 4, 5, 6, 7, 8]
 
 
 def test_post_order(filled_tree):
+    assert list(BST().post_order()) == []
+    assert list(BST(1).post_order()) == [1]
     assert list(filled_tree.post_order()) == [3, 5, 4, 8, 7, 6]
 
+
 def test_breadth_first(filled_tree):
+    assert list(BST().breadth_first()) == []
+    assert list(BST(1).breadth_first()) == [1]
     assert list(filled_tree.breadth_first()) == [6, 4, 7, 3, 5, 8]

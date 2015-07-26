@@ -134,6 +134,8 @@ class BST(object):
             return None
 
     def _lr_levels(self):
+        """Return a tuple containing the levels of the left and right nodes
+        of the root node. If no nodes are present, return None."""
         def _levels(node):
             l, r = 0, 0
             if node.left is not None:
@@ -196,7 +198,6 @@ class BST(object):
     def breadth_first(self):
         """Return a generator that will return the values in the
         tree using breadth-first traversal, one at a time."""
-
         def go(n):
             if self.root is not None:
                 todo = Queue([self.root])
