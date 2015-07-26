@@ -84,7 +84,7 @@ overhead.
 
 The bellmanfor search method also returns the same path, but has the added
 ability to handle edges with negative values and detect negative feedback
-loops. It is relatively robust, but at added time complexity cost of 
+loops. It is relatively robust, but at added time complexity cost of
 O(nodes * edges).
 
 See the doc strings for additional implementation details.
@@ -92,21 +92,20 @@ See the doc strings for additional implementation details.
 ## BST -- Binary Search Tree
 This is a linked-list like tree structure. The Node class implementation
 includes a bi-directional relationship between parent and child nodes; the
-BST itself naively has knowledge of only the root node directly. Many of the
-available methods, including size, depth, balance will traverse the entire tree
-and will have O(n) complexity. Insert() and contains() leverage tree sorting 
-to execute with O(log n) complexity.
+BST itself naively has knowledge of only the root node directly. The depth, balance and traversal methods traverse the entire tree and therefore have
+O(n) time complexity. Insert() and contains() leverage tree sorting to
+execute with O(log n) time complexity.
 
 Available methods include:
-* insert(val)
-* size()
-* contains()
-* balance()
-* depth()
-* in_order()
-* pre_order()
-* post_order()
-* breadth_first()
+* insert(val)     --> None
+* size()          --> Integer
+* contains(val)   --> Boolean
+* balance()       --> Integer
+* depth()         --> Integer
+* in_order()      --> Generator
+* pre_order()     --> Generator
+* post_order()    --> Generator
+* breadth_first() --> Generator
 
 See the doc strings for additional implementation details.
 
