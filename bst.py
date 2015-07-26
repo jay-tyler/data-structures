@@ -87,6 +87,7 @@ class BST(object):
         except AttributeError:
             return False
 
+    @property
     def size(self):
         """Return int size of tree. Will return 0 if tree is empty."""
         return self._size
@@ -112,13 +113,8 @@ class BST(object):
         return 0
 
     def _find(self, val):
-        """Return a tuple containing (node, side) with target val if it exists,
-        otherwise return the would be parent and 1 if it is on the left, -1 if
-        it is on the right, 0 if it is the root."""
-        # Can't remember if we changed our minds or forgot to implement this.
         """Return the node with target val if it exists, otherwise return the
         would be parent."""
-
         def _look(node):
             if node.val > val:
                 if node.left is not None:

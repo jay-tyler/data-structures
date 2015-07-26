@@ -6,19 +6,6 @@ from uuid import uuid4
 @pytest.fixture
 def filled_tree():
     A = Node(6)
-    # B = Node(4, parent=A)
-    # C = Node(7, parent=A)
-    # D = Node(3, parent=B)
-    # E = Node(5, parent=B)
-    # F = Node(8, parent=C)
-
-    # # Backrefs
-    # A.left = B
-    # A.right = C
-    # B.left = D
-    # B.right = E
-    # C.right = F
-
     a = BST()
     a.root = A
     A.left = 4
@@ -41,7 +28,6 @@ def test_insert():
     nums = [4, 2, 6, 1, 3, 5, 7]
     for num in nums:
         aBST.insert(num)
-
     assert aBST.root.val == 4
     assert aBST.root.parent is None
     assert aBST.root.left.val == 2
@@ -60,58 +46,41 @@ def test_insert():
 
 def test_val_exists():
     aBST = BST()
-    aBST.insert(1)
-    aBST.insert(1)
+    aBST.insert(2)
+    aBST.insert(2)
     assert aBST.root.left is None
     assert aBST.root.right is None
-
-
-def test_repr():
-    aBST = BST()
-    aBST.insert(4)
-    aBST.insert(2)
-    aBST.insert(6)
+    assert aBST.size == 1
+    aBST.insert(1)
+    aBST.insert(3)
+    aBST.insert(1)
+    aBST.insert(3)
+    assert aBST.size == 3
 
 
 def test_size():
     aBST = BST()
-    assert aBST.size() == 0
+    assert aBST.size == 0
     aBST.insert("Jason")
-    assert aBST.size() == 1
+    assert aBST.size == 1
     aBST.insert("Tyler")
-    assert aBST.size() == 2
+    assert aBST.size == 2
     aBST.insert("I cant use Tyler again")
-    assert aBST.size() == 3
+    assert aBST.size == 3
     aBST.insert("Peek")
-    assert aBST.size() == 4
+    assert aBST.size == 4
     for x in range(2000):
         aBST.insert(uuid4())
-    assert aBST.size() == 2004
+    assert aBST.size == 2004
 
 
 def test_balance():
     aBST = BST()
     assert aBST.balance() == 0
-    aBST.insert(4)
-    assert aBST.balance() == 0
-    aBST.insert(2)
-    assert aBST.balance() == 1
-    aBST.insert(6)
-    assert aBST.balance() == 0
-    aBST.insert(3)
-    assert aBST.balance() == 1
-    aBST.insert(7)
-    assert aBST.balance() == 0
-    aBST.insert(8)
-    assert aBST.balance() == -1
-    aBST.insert(9)
-    assert aBST.balance() == -2
-    aBST.insert(10)
-    assert aBST.balance() == -3
-    aBST.insert(11)
-    for x in range(2000):
-        aBST.insert(uuid4())
-    assert aBST.balance != 0
+    for num, bal in zip([4, 2, 6, 3, 7, 8, 9, 10, 11],
+                        [0, 1, 0, 1, 0, -1, -2, -3]):
+        aBST.insert(num)
+        assert aBST.balance() == bal
 
 
 def test_lr_levels():
