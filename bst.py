@@ -230,7 +230,7 @@ if __name__ == '__main__':
     for x in range(100000):
         BST2.contains(1)
     print "Search for the value 1 in a tree that has the value 1 at its root."
-    print "Repeat 100,000 times"
+    print "Repeat 100,000 times."
     end = default_timer()
     print str(end - start) + "<-- Quite fast!\n"
     # Or that the tree is well balanced.
@@ -252,7 +252,7 @@ if __name__ == '__main__':
     for x in range(250000):
         BST2.contains(500000)
     print "Search for the value 500,000 in a well balanced tree of 400,065"
-    print "nodes. Repeat 250,000 times"
+    print "nodes. Repeat 250,000 times."
     end = default_timer()
     print str(end - start) + "<-- Fast Enough!\n"
 
