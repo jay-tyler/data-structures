@@ -142,7 +142,16 @@ class BST(object):
     def in_order(self):
         """Return a generator that will return the values in the
         tree using in-order traversal, one at a time."""
-        pass
+        def go(n):
+            if n is None:
+                return
+            for node in go(n.left):
+                yield node
+            yield n
+            for node in go(n.right):
+                yield node
+        for node in go(self.root):
+            yield node.val
 
     def pre_order(self):
         """Return a generator that will return the values in the
@@ -161,7 +170,16 @@ class BST(object):
     def post_order(self):
         """Return a generator that will return the values in the
         tree using post_order traversal, one at a time."""
-        pass
+        def go(n):
+            if n is None:
+                return
+            for node in go(n.left):
+                yield node
+            for node in go(n.right):
+                yield node
+            yield n
+        for node in go(self.root):
+            yield node.val
 
     def breadth_first(self):
         """Return a generator that will return the values in the

@@ -24,29 +24,6 @@ def filled_tree():
     return a
 
 
-@pytest.fixture
-def filled_tree2():
-    A = Node(4)
-    B = Node(2, parent=A)
-    C = Node(6, parent=A)
-    D = Node(1, parent=B)
-    E = Node(3, parent=B)
-    F = Node(5, parent=C)
-    G = Node(7, parent=C)
-
-    # Backrefs
-    A.left = B
-    A.right = C
-    B.left = D
-    B.right = E
-    C.left = G
-    C.right = F
-
-    a = BST()
-    a.root = A
-    return a
-
-
 def test_find():
     assert BST()._find(42) is None
     aBST = BST(20)
@@ -191,3 +168,11 @@ def test_contains(filled_tree):
 
 def test_pre_order(filled_tree):
     assert list(filled_tree.pre_order()) == [6, 4, 3, 5, 7, 8]
+
+
+def test_in_order(filled_tree):
+    assert list(filled_tree.in_order()) == [3, 4, 5, 6, 7, 8]
+
+
+def test_post_order(filled_tree):
+    assert list(filled_tree.post_order()) == [3, 5, 4, 8, 7, 6]
