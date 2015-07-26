@@ -87,8 +87,6 @@ O(nodes * edges).
 
 See the doc strings for additional implementation details.
 
-[![Build Status](https://travis-ci.org/jonathanstallings/data-structures.svg?branch=master)](https://travis-ci.org/jonathanstallings/data-structures)
-
 ## BST -- Binary Search Tree
 This is a linked-list like tree structure. The Node class implementation
 includes a bi-directional relationship between parent and child nodes; the
@@ -103,5 +101,11 @@ Available methods include:
 * contains()
 * balance()
 * depth()
+* in_order()
+* pre_order()
+* post_order()
+* breadth_first()
 
 See the doc strings for additional implementation details.
+
+[![Build Status](https://travis-ci.org/tpeek/data-structures-1.svg?branch=master)](https://travis-ci.org/jonathanstallings/data-structures)
