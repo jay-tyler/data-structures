@@ -228,12 +228,12 @@ class BST(object):
             child = None
 
             # Checking for children of node
-            if left_c is not None:
+            if node._left is not None:
                 left_c = True
                 child = node._left
             else:
                 left_c = False
-            if right_c is not None:
+            if node._right is not None:
                 right_c = True
                 child = node._right
             else:
@@ -245,7 +245,7 @@ class BST(object):
             # node
             if node.parent._left == node:
                 node.parent._left, child.parent = child, node.parent
-            elif node.parent.r == node:
+            elif node.parent._right == node:
                 node.parent._right, child.parent = child, node.parent
 
         # Case 1 and 2: Node has zero children or one child
