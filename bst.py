@@ -211,11 +211,12 @@ class BST(object):
         for node in go(self.root):
             yield node.val
 
-    def delete(val):
+    def delete(self, val):
         """Delete node corresponding to val"""
-        target = _find(val)
+        target = self._find(val)
         # Check here that target.val is val; don't go into cases below if so
         if target.val != val:
+            # Case of not finding val in tree
             return None
 
         def _adj_pred(node):
@@ -224,7 +225,23 @@ class BST(object):
 
         def _del_target(node):
             """Delete node, if node has one or zero children"""
-            pass
+            # Getting sidedness of 1-child of node, if it exists
+            if left_c is not None:
+                left_c = True
+                child = node.left
+            if right_c is not None:
+                right_c = True
+                child = node.right
+
+            if left_c and right_c:
+                raise ValueError("Deleted node can have one or zero children")
+
+            # Get linkage of parent to node; link parent to child to skip over
+            # node
+            if node.parent.l == node:
+                node.parent.l, child.parent = child, node.parent
+            elif node.parent.r == node:
+                node.parent.r, child.parent = child, node.parent
 
         # Case 1 and 2: Node has zero children or one child
 
