@@ -242,7 +242,7 @@ class BST(object):
                 raise ValueError("Deleted node can have one or zero children")
 
             # Delete root of tree
-            if node.parent == None:
+            if node.parent is None:
                 child.parent = None
                 self.root = child
             # Get linkage of parent to node; link parent to child to skip over
