@@ -145,16 +145,16 @@ def test_breadth_first(filled_tree):
     assert list(filled_tree.breadth_first()) == [6, 4, 7, 3, 5, 8]
 
 
-# def test_del_node_with_two_children(filled_tree):
-#     assert filled_tree.contains(6) is True
-#     filled_tree.delete(6)
-#     assert filled_tree.contains(6) is False
+def test_del_node_with_two_children(filled_tree):
+    assert filled_tree.contains(6) is True
+    filled_tree.delete(6)
+    assert filled_tree.contains(6) is False
 
 
-# def test_del_node_with_one_child(uneven_tree):
-#     assert uneven_tree.contains(8) is True
-#     uneven_tree.delete(8)
-#     assert uneven_tree.contains(8) is False
+def test_del_node_with_one_child(uneven_tree):
+    assert uneven_tree.contains(8) is True
+    uneven_tree.delete(8)
+    assert uneven_tree.contains(8) is False
 
 
 def test_del_node_with_no_children(filled_tree):
@@ -162,10 +162,10 @@ def test_del_node_with_no_children(filled_tree):
     filled_tree.delete(8)
     assert filled_tree.contains(8) is False
 
-# def test_del_all(filled_tree, uneven_tree):
-#     for num in [3, 4, 5, 6, 7, 8]:
-#         filled_tree.delete(num)
-#         assert filled_tree.contains(num) is False
-#     for num in [3, 4, 5, 6, 7, 8, 9, 10]:
-#         uneven_tree.delete(num)
-#         assert uneven_tree.contains(num) is False
+def test_del_all(filled_tree, uneven_tree):
+    for num in [3, 4, 5, 6, 7, 8]:
+        filled_tree.delete(num)
+        assert filled_tree.contains(num) is False
+    for num in [3, 4, 5, 6, 7, 8, 9, 10]:
+        uneven_tree.delete(num)
+        assert uneven_tree.contains(num) is False

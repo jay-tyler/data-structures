@@ -228,7 +228,6 @@ class BST(object):
         def _del_target(node):
             """Delete node, if node has one or zero children"""
             child = None
-            import pdb; pdb.set_trace()
             # Checking for children of node
             if node._left is not None:
                 left_c = True
@@ -245,8 +244,11 @@ class BST(object):
 
             # Delete root of tree
             if node.parent is None:
-                child.parent = None
-                self.root = child
+                try:
+                    child.parent = None
+                    self.root = child
+                except AttributeError:
+                    self.root = None
             # Get linkage of parent to node; link parent to child to skip over
             # node
             elif node.parent._left == node:
