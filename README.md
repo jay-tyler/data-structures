@@ -106,6 +106,7 @@ Available methods include:
 * pre_order()     --> Generator
 * post_order()    --> Generator
 * breadth_first() --> Generator
+* delete(val)     --> None
 
 See the doc strings for additional implementation details.
 
