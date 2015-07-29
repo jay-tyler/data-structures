@@ -250,9 +250,17 @@ class BST(object):
             # Get linkage of parent to node; link parent to child to skip over
             # node
             elif node.parent._left == node:
-                node.parent._left, child.parent = child, node.parent
+                node.parent._left = child
+                try:
+                    child.parent = node.parent
+                except AttributeError:
+                    pass
             elif node.parent._right == node:
-                node.parent._right, child.parent = child, node.parent
+                node.parent._right = child
+                try:
+                    child.parent = node.parent
+                except AttributeError:
+                    pass
 
         # Case 1 and 2: Node has zero children or one child
 
