@@ -108,7 +108,7 @@ class BST(object):
         --Positive if more on left
         --Zero if tree is perfectly balanced"""
         if self.root is not None:
-            l, r = self._lr_levels()
+            l, r = self._lr_levels()aww
             return l - r
         return 0
 
@@ -206,6 +206,26 @@ class BST(object):
                         todo.enqueue(n.right)
         for node in go(self.root):
             yield node.val
+
+    def delete(val):
+        """Delete node corresponding to val"""
+        target = _find(val)
+        # Check here that target.val is val; don't go into cases below if so
+        if target.val != val:
+            return None
+
+        def _adj_pred(node):
+            """Return the node with the nearest precedecessor val"""
+            pass
+
+        def _del_target(node):
+            """Delete node, if node has one or zero children"""
+            pass
+
+        # Case 1 and 2: Node has zero children or one child
+
+        # Case 3: Node has two children
+
 
 if __name__ == '__main__':
     # Worst case senerio, the BST is completely unbalanced:
