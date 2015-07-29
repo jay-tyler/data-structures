@@ -225,23 +225,28 @@ class BST(object):
 
         def _del_target(node):
             """Delete node, if node has one or zero children"""
-            # Getting sidedness of 1-child of node, if it exists
+            child = None
+
+            # Checking for children of node
             if left_c is not None:
                 left_c = True
-                child = node.left
+                child = node._left
+            else:
+                left_c = False
             if right_c is not None:
                 right_c = True
-                child = node.right
-
+                child = node._right
+            else:
+                right_c = False
             if left_c and right_c:
                 raise ValueError("Deleted node can have one or zero children")
 
             # Get linkage of parent to node; link parent to child to skip over
             # node
-            if node.parent.l == node:
-                node.parent.l, child.parent = child, node.parent
+            if node.parent._left == node:
+                node.parent._left, child.parent = child, node.parent
             elif node.parent.r == node:
-                node.parent.r, child.parent = child, node.parent
+                node.parent._right, child.parent = child, node.parent
 
         # Case 1 and 2: Node has zero children or one child
 
