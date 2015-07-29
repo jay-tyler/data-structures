@@ -244,6 +244,7 @@ class BST(object):
             # Delete root of tree
             if node.parent == None:
                 child.parent = None
+                self.root = child
             # Get linkage of parent to node; link parent to child to skip over
             # node
             elif node.parent._left == node:
