@@ -207,6 +207,74 @@ class BST(object):
         for node in go(self.root):
             yield node.val
 
+    def delete(self, val):
+        """Delete node corresponding to val"""
+        target = self._find(val)
+        # Check here that target.val is val; don't go into cases below if so
+        if target.val != val:
+            # Case of not finding val in tree
+            return None
+
+        def _adj_pred(node):
+            """Return the node with the nearest precedecessor val"""
+            pred = None
+            if node.left is not None:
+                pred = node.left
+                while pred.right is not None:
+                    pred = pred.right
+                return pred
+
+
+        def _del_target(node):
+            """Delete node, if node has one or zero children"""
+            child = None
+            # Checking for children of node
+            if node._left is not None:
+                left_c = True
+                child = node._left
+            else:
+                left_c = False
+            if node._right is not None:
+                right_c = True
+                child = node._right
+            else:
+                right_c = False
+            if left_c and right_c:
+                raise ValueError("Deleted node can have one or zero children")
+
+            # Delete root of tree
+            if node.parent is None:
+                try:
+                    child.parent = None
+                    self.root = child
+                except AttributeError:
+                    self.root = None
+            # Get linkage of parent to node; link parent to child to skip over
+            # node
+            elif node.parent._left == node:
+                node.parent._left = child
+                try:
+                    child.parent = node.parent
+                except AttributeError:
+                    pass
+            elif node.parent._right == node:
+                node.parent._right = child
+                try:
+                    child.parent = node.parent
+                except AttributeError:
+                    pass
+
+        # Case 1 and 2: Node has zero children or one child
+
+        # Case 3: Node has two children
+        if target.left is None or target.right is None:
+            _del_target(target)
+        else:
+            pred = _adj_pred(target)
+            target.val = pred.val
+            _del_target(pred)
+
+
 if __name__ == '__main__':
     # Worst case senerio, the BST is completely unbalanced:
     # either:

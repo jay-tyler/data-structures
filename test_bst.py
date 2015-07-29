@@ -17,6 +17,22 @@ def filled_tree():
     return a
 
 
+@pytest.fixture
+def uneven_tree():
+    A = Node(6)
+    a = BST()
+    a.root = A
+    A.left = 4
+    A.right = 7
+    A.left.left = 3
+    A.left.right = 5
+    A.right.right = 8
+    A.right.right.right = 9
+    A.right.right.right.right = 10
+    a._size = 6
+    return a
+
+
 def test_find():
     assert BST()._find(42) is None
     aBST = BST(20)
@@ -127,3 +143,29 @@ def test_breadth_first(filled_tree):
     assert list(BST().breadth_first()) == []
     assert list(BST(1).breadth_first()) == [1]
     assert list(filled_tree.breadth_first()) == [6, 4, 7, 3, 5, 8]
+
+
+def test_del_node_with_two_children(filled_tree):
+    assert filled_tree.contains(6) is True
+    filled_tree.delete(6)
+    assert filled_tree.contains(6) is False
+
+
+def test_del_node_with_one_child(uneven_tree):
+    assert uneven_tree.contains(8) is True
+    uneven_tree.delete(8)
+    assert uneven_tree.contains(8) is False
+
+
+def test_del_node_with_no_children(filled_tree):
+    assert filled_tree.contains(8) is True
+    filled_tree.delete(8)
+    assert filled_tree.contains(8) is False
+
+def test_del_all(filled_tree, uneven_tree):
+    for num in [3, 4, 5, 6, 7, 8]:
+        filled_tree.delete(num)
+        assert filled_tree.contains(num) is False
+    for num in [3, 4, 5, 6, 7, 8, 9, 10]:
+        uneven_tree.delete(num)
+        assert uneven_tree.contains(num) is False
