@@ -228,7 +228,7 @@ class BST(object):
         def _del_target(node):
             """Delete node, if node has one or zero children"""
             child = None
-
+            import pdb; pdb.set_trace()
             # Checking for children of node
             if node._left is not None:
                 left_c = True
@@ -262,7 +262,7 @@ class BST(object):
         else:
             pred = _adj_pred(target)
             target.val = pred.val
-            _del_taget(pred)
+            _del_target(pred)
 
 
 if __name__ == '__main__':
