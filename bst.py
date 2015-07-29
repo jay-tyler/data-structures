@@ -241,9 +241,12 @@ class BST(object):
             if left_c and right_c:
                 raise ValueError("Deleted node can have one or zero children")
 
+            # Delete root of tree
+            if node.parent == None:
+                child.parent = None
             # Get linkage of parent to node; link parent to child to skip over
             # node
-            if node.parent._left == node:
+            elif node.parent._left == node:
                 node.parent._left, child.parent = child, node.parent
             elif node.parent._right == node:
                 node.parent._right, child.parent = child, node.parent
