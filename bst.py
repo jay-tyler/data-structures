@@ -224,7 +224,6 @@ class BST(object):
                     pred = pred.right
                 return pred
 
-
         def _del_target(node):
             """Delete node, if node has one or zero children"""
             child = None
@@ -264,15 +263,26 @@ class BST(object):
                 except AttributeError:
                     pass
 
-        # Case 1 and 2: Node has zero children or one child
-
-        # Case 3: Node has two children
         if target.left is None or target.right is None:
             _del_target(target)
         else:
             pred = _adj_pred(target)
             target.val = pred.val
             _del_target(pred)
+
+    def _rotr(self, root, pivot):
+        """Perform a right rotation on root, pivot nodes"""
+        root._left = pivot._right
+        pivot._right = root
+        pivot._right.parent = root
+        root.parent = pivot
+
+    def _rotl(self, root, pivot):
+        """Perform a left rotation on root, pivot nodes"""
+        root._right = pivot._left
+        pivot._left = root
+        pivot._left.parent = root
+        root.parent = pivot
 
 
 if __name__ == '__main__':
@@ -306,7 +316,7 @@ if __name__ == '__main__':
     def bal_tree(nums, start, end):
         if start > end:
             return None
-        midpt = start + (end - start)//2
+        midpt = start + (end - start) // 2
         BST3.insert(nums[midpt])
         bal_tree(nums, start, midpt-1)
         bal_tree(nums, midpt+1, end)
