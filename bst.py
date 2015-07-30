@@ -224,7 +224,6 @@ class BST(object):
                     pred = pred.right
                 return pred
 
-
         def _del_target(node):
             """Delete node, if node has one or zero children"""
             child = None
@@ -306,10 +305,10 @@ if __name__ == '__main__':
     def bal_tree(nums, start, end):
         if start > end:
             return None
-        midpt = start + (end - start)//2
+        midpt = start + (end - start) // 2
         BST3.insert(nums[midpt])
-        bal_tree(nums, start, midpt-1)
-        bal_tree(nums, midpt+1, end)
+        bal_tree(nums, start, midpt - 1)
+        bal_tree(nums, midpt + 1, end)
 
     BST3 = BST()
     nums = range(1, 400065)
