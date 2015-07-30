@@ -313,7 +313,7 @@ if __name__ == '__main__':
     BST3 = BST()
     nums = range(1, 400065)
     print "Creating huge binary search tree, please wait..."
-    bal_tree(nums, 0, len(nums)-1)
+    bal_tree(nums, 0, len(nums) - 1)
 
     start = default_timer()
     for x in range(250000):
