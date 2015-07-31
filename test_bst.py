@@ -1,6 +1,7 @@
 import pytest
 from bst import BST, Node
 from uuid import uuid4
+from random import randint
 
 
 @pytest.fixture
@@ -162,6 +163,7 @@ def test_del_node_with_no_children(filled_tree):
     filled_tree.delete(8)
     assert filled_tree.contains(8) is False
 
+
 def test_del_all(filled_tree, uneven_tree):
     for num in [3, 4, 5, 6, 7, 8]:
         filled_tree.delete(num)
@@ -169,3 +171,19 @@ def test_del_all(filled_tree, uneven_tree):
     for num in [3, 4, 5, 6, 7, 8, 9, 10]:
         uneven_tree.delete(num)
         assert uneven_tree.contains(num) is False
+
+
+def test_make_balanced(uneven_tree):
+    assert uneven_tree.balance() == -2
+    uneven_tree.make_balanced()
+    assert uneven_tree.balance() == 0
+
+
+def test_make_balanced_randomly():
+    aBST = BST()
+    for y in range(300):
+        for x in range(1000):
+            aBST.insert(randint(0, 1000))
+        aBST.make_balanced()
+        b = aBST.balance()
+        assert b in [1, 0, -1]

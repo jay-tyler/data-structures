@@ -271,18 +271,36 @@ class BST(object):
             _del_target(pred)
 
     def _rotr(self, root, pivot):
-        """Perform a right rotation on root, pivot nodes"""
+        """Perform a right rotation on root, pivot nodes
+
+        For a self-ballancing tree. This may be implemented soon."""
         root._left = pivot._right
         pivot._right = root
         pivot._right.parent = root
         root.parent = pivot
 
     def _rotl(self, root, pivot):
-        """Perform a left rotation on root, pivot nodes"""
+        """Perform a left rotation on root, pivot nodes
+
+        For a self-ballancing tree. This may be implemented soon."""
         root._right = pivot._left
         pivot._left = root
         pivot._left.parent = root
         root.parent = pivot
+
+    def make_balanced(self):
+        cheat = list(BST().in_order())
+        self.root = None
+
+        def _bal_tree(nums, start, end):
+            if start > end:
+                return
+            midpt = start + (end - start) // 2
+            self.insert(nums[midpt])
+            bal_tree(nums, start, midpt - 1)
+            bal_tree(nums, midpt + 1, end)
+
+        _bal_tree(cheat, 0, len(cheat) - 1)
 
 
 if __name__ == '__main__':
