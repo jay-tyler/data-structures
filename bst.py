@@ -274,19 +274,21 @@ class BST(object):
         """Perform a right rotation on root, pivot nodes
 
         For a self-ballancing tree. This may be implemented soon."""
-        root._left = pivot._right
-        pivot._right = root
-        pivot._right.parent = root
-        root.parent = pivot
+        if pivot._right is not None:
+            root._left = pivot._right
+            pivot._right = root
+            pivot._right.parent = root
+            root.parent = pivot
 
     def _rotl(self, root, pivot):
         """Perform a left rotation on root, pivot nodes
 
         For a self-ballancing tree. This may be implemented soon."""
-        root._right = pivot._left
-        pivot._left = root
-        pivot._left.parent = root
-        root.parent = pivot
+        if pivot._left is not None:
+            root._right = pivot._left
+            pivot._left = root
+            pivot._left.parent = root
+            root.parent = pivot
 
     def make_balanced(self):
         cheat = list(BST().in_order())
