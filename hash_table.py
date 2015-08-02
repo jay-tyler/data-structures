@@ -23,4 +23,4 @@ class Hash_Table(object):
         total = 0
         for char in key:
             total += ord(char)
-        return total / self.num_bins
+        return total % self.num_bins
