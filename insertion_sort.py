@@ -1,9 +1,9 @@
- def insort(slist):
+def insort(unlist):
     """Insertion sort a list
 
     Implementation follows after gif here
     https://en.wikipedia.org/wiki/Insertion_sort"""
-
+    slist = unlist[:]
     for i in range(1, len(slist)):
         j = i - 1
         while j >= 0:
@@ -12,5 +12,5 @@
                 j -= 1
                 i -= 1
             else:
-                break 
+                break
     return slist
