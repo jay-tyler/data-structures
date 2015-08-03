@@ -36,7 +36,7 @@ if __name__ == "__main__":
     stop = time.time()
     worst_time = (stop - start) / 100
 
-    print "best case: {best}\n\nworst case: {worst}".format(
-        best=best_time, worst=worst_time) +\
-        "\n\nBest case is {} times better than worst for n=100".format(
-        worst_time/best_time)
+    print "Best case is {:.1f} times better than worst for n=100\n\n".format(
+        worst_time/best_time) +\
+        "best case: {best:.2E}\n\nworst case: {worst:.2E}".format(
+        best=best_time, worst=worst_time)
