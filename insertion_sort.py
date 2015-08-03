@@ -29,7 +29,7 @@ if __name__ == "__main__":
     stop = time.time()
     best_time = (stop - start) / 100
 
-    #O(n**2) worst case 
+    # O(n**2) worst case 
     start = time.time()
     for i in range(100):
         insort(range(100)[::-1])
