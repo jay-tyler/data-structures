@@ -27,6 +27,9 @@ def test_set():
 
 
 def test_hash():
+    """Test hash by placing all entries in system dict to hash and 
+    subsequently retrieving"""
+
     ht = Hash_Table(100000)
     with open('/usr/share/dict/words', 'r') as file:
         lines = file.readlines()
