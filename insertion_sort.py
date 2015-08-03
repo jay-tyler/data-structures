@@ -38,5 +38,5 @@ if __name__ == "__main__":
 
     print "Best case is {:.1f} times better than worst for n=100\n\n".format(
         worst_time/best_time) +\
-        "best case: {best:.2E}\n\nworst case: {worst:.2E}".format(
+        "best case: {best:.2E} s\n\nworst case: {worst:.2E} s".format(
         best=best_time, worst=worst_time)
