@@ -9,7 +9,7 @@ def test_correct_size():
 
 
 def test_get():
-    """Get only excepts Strings or lists of chars.
+    """Get only accepts Strings or lists of chars.
     Raises an error for all other types."""
     ht = Hash_Table(100)
     for aType in [None, 1, [2, 3], {4: 5}, (6, 7), ht]:
@@ -18,7 +18,7 @@ def test_get():
 
 
 def test_set():
-    """Set only excepts Strings or lists of chars.
+    """Set only accepts Strings or lists of chars.
     Raises an error for all other types."""
     ht = Hash_Table(100)
     for aType in [None, 1, [2, 3], {4: 5}, (6, 7), ht]:
@@ -27,4 +27,14 @@ def test_set():
 
 
 def test_hash():
-    pass
+    ht = Hash_Table(100000)
+    with open('/usr/share/dict/words', 'r') as file:
+        lines = file.readlines()
+    lines = [line.rstrip('\n') for line in lines]
+
+    for line in lines:
+        ht.set(line, line)
+
+    for line in lines:
+        testval = ht.get(line)
+        assert testval == line
