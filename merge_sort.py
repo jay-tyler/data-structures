@@ -17,23 +17,23 @@ def mersort(unslist):
 
 
 def _merge(llist, rlist):
-        """Desructively return an ascending sorted list from two ascending
-        sorted lists.
+    """Desructively return an ascending sorted list from two ascending
+    sorted lists.
 
-        Implementation after psuedocode here:
-        https://en.wikipedia.org/wiki/Merge_sort
-        """
-        mlist = []
-        llist.reverse()
-        rlist.reverse()
-        while llist and rlist:
-            if llist[-1] <= rlist[-1]:
-                mlist.append(llist.pop())
-            else:
-                mlist.append(rlist.pop())
-        # For straglers, the following two blocks
-        while llist:
+    Implementation after psuedocode here:
+    https://en.wikipedia.org/wiki/Merge_sort
+    """
+    mlist = []
+    llist.reverse()
+    rlist.reverse()
+    while llist and rlist:
+        if llist[-1] <= rlist[-1]:
             mlist.append(llist.pop())
-        while rlist:
+        else:
             mlist.append(rlist.pop())
-        return mlist
+    # For straglers, the following two blocks
+    while llist:
+        mlist.append(llist.pop())
+    while rlist:
+        mlist.append(rlist.pop())
+    return mlist
