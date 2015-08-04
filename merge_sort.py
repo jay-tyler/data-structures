@@ -1,4 +1,3 @@
-
 def merge(llist, rlist):
     mlist = []
     llist = llist[:]
