@@ -1,22 +1,31 @@
-def quisort(uslist, lo, hi):
+def quisort(uslist, lo=None, hi=None):
+    """Sort in-place an unsorted list or slice of a list
+
+    lo and hi correspond to the start and stop indices for the list slice"""
+
+    if hi is None:
+        hi = len(uslist) - 1
+    if lo is None:
+        lo = 0
+
+    def partition(uslist, lo, hi):
+        """Compare and swap values over list slice"""
+        p = uslist[hi]
+        i = lo - 1
+        j = lo
+        while j < hi:
+            if uslist[j] <= p:
+                i = i + 1
+                uslist[i], uslist[j] = uslist[j], uslist[i]
+            j += 1
+        i += 1
+        uslist[i], uslist[hi] = uslist[hi], uslist[i]
+        return i
+
     if lo < hi:
         p = partition(uslist, lo, hi)
         quisort(uslist, lo, p - 1)
         quisort(uslist, p + 1, hi)
-
-
-def partition(uslist, lo, hi):
-    p = uslist[hi]
-    i = lo - 1
-    j = lo
-    while j < hi:
-        if uslist[j] <= p:
-            i = i + 1
-            uslist[i], uslist[j] = uslist[j], uslist[i]
-        j += 1
-    i += 1
-    uslist[i], uslist[hi] = uslist[hi], uslist[i]
-    return i
 
 
 if __name__ == "__main__":
@@ -28,13 +37,13 @@ if __name__ == "__main__":
     # When the numbers are in random order, the running time
     # will be very close to the best case, nlog(n).
     size = 995
-    aList = range(size)
-    bList = [1 for _ in range(size)]
+    a_list = range(size)
+    b_list = [1 for _ in range(size)]
 
     start = time.time()
     for i in range(100):
-        shuffle(aList)
-        quisort(aList, 0, size - 1)
+        shuffle(a_list)
+        quisort(a_list)
     stop = time.time()
     best_time = (stop - start)
 
@@ -43,8 +52,8 @@ if __name__ == "__main__":
     start = time.time()
     for i in range(100):
         # Keep operations the same for comparison
-        shuffle(aList)
-        quisort(bList, 0, size - 1)
+        shuffle(a_list)
+        quisort(b_list)
     stop = time.time()
     worst_time = (stop - start)
 
