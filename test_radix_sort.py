@@ -30,16 +30,8 @@ def test_sameval_radixsort():
         assert item == 3
 
 
-def test_char_radixsort():
-    initlist = list('abcdefghijklmnopq')
-    tlist = initlist[:]
-    shuffle(tlist)
-    tlist = radsort(tlist)
-    assert tlist == initlist
-
-
 def test_bad_case():
-    initlist = [10**x for x in range(1000)]
+    initlist = [10**x for x in range(100)]
     tlist = list(reversed(initlist))
     tlist = radsort(tlist)
     assert tlist == initlist
