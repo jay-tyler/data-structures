@@ -97,6 +97,7 @@ O(n) time complexity. Insert() and contains() leverage tree sorting to
 execute with O(log n) time complexity.
 
 Available methods include:
+
 * insert(val)     --> None
 * size()          --> Integer
 * contains(val)   --> Boolean
@@ -107,6 +108,15 @@ Available methods include:
 * post_order()    --> Generator
 * breadth_first() --> Generator
 * delete(val)     --> None
+
+See the doc strings for additional implementation details.
+
+## Sort Methods
+The following sort methods are provided:
+
+* insertion_sort package: insort(list) --> sorted List
+* merge_sort package: mersort(list) --> sorted List
+* quick_sort package: quisort(list) --> sorted list
 
 See the doc strings for additional implementation details.
 
