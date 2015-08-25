@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 import pytest
 
-from priorityq import PriorityQ, QNode
+from dtypes.priorityq import PriorityQ, QNode
 
 
 @pytest.fixture()

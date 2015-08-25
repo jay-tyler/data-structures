@@ -1,5 +1,5 @@
 import pytest
-from bst import BST, Node
+from dtypes.bst import BST, Node
 from uuid import uuid4
 from random import randint
 

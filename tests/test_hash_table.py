@@ -1,4 +1,4 @@
-from hash_table import Hash_Table
+from dtypes.hash_table import Hash_Table
 import pytest
 
 

@@ -1,4 +1,4 @@
-from quick_sort import quisort
+from dtypes.quick_sort import quisort
 from random import shuffle
 import pytest
 

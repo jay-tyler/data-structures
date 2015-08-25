@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 import pytest
 
-from stack import Stack
+from dtypes.stack import Stack
 
 
 @pytest.fixture

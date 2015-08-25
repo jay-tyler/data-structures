@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 import pytest
 
-from queue import Queue
+from dtypes.queue import Queue
 
 #  (Input, expected) for well constructed instantiation arguments,
 #  and one subsequent dequeue

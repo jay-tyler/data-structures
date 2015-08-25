@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 import pytest
-from binary_heap import BinaryHeap
+from dtypes.binary_heap import BinaryHeap
 
 #  (in, expected) for constructors
 valid_constructor_args = [

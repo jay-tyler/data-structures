@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 import pytest
-import linked_list as ll
+import dtypes.linked_list as ll
 
 
 @pytest.fixture

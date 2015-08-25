@@ -1,4 +1,4 @@
-from insertion_sort import insort
+from dtypes.insertion_sort import insort
 from random import randint
 import pytest
 

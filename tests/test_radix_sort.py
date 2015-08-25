@@ -1,4 +1,4 @@
-from radix_sort import radsort
+from dtypes.radix_sort import radsort
 from random import shuffle
 import pytest
 

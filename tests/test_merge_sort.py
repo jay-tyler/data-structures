@@ -1,4 +1,4 @@
-from merge_sort import mersort, _merge
+from dtypes.merge_sort import mersort, _merge
 from random import randint
 import pytest
 

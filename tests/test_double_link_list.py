@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 import pytest
-from double_link_list import DoubleLinkList
+from dtypes.double_link_list import DoubleLinkList
 
 #  (Input, expected) for well constructed instantiation arguments,
 #  and one subsequent pop
