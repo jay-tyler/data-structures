@@ -1,5 +1,5 @@
 #Data Structures
-Implementation of LinkedList and Stack data structures in Python.
+Implementation of data structures and algorithms in Python. Done as a pedagogical exercise.
 
 ##LinkedList
 The LinkedList class is composed of a Node base class.
