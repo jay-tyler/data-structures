@@ -82,7 +82,7 @@ class LinkedList(object):
 
         Slightly expensive implementation, but alas, no way to reverse
         an iterator"""
-        self.extend(other)
+        self.extend(other.__list__())
         return self
 
     def __mul__(self, n):
@@ -104,17 +104,17 @@ class LinkedList(object):
             if i == index:
                 return node
 
+    def __delitem__(self, index):
+        #TODO
+        pass
+
     def copy(self):
         return LinkedList(self.__list__())
 
-    def extend(self, iteratable):
-        """Extend to include iterable
-
-        Slightly expensive implementation, but alas, no way to reverse
-        an iterator"""
-        vals = self.__list__()
-        for val in reversed(vals):
-            self.insert(val)
+    def extend(self, iterable):
+        """Add values in iterable to end of LinkedList"""
+        for val in iterable:
+            self.append(val)
         return self
 
     def count(self, val):
@@ -180,6 +180,7 @@ class LinkedList(object):
             return None
 
     def remove(self, search_node):
+        #TODO: remove by value
         """Remove given node from list, return None.
 
         args:
@@ -193,3 +194,15 @@ class LinkedList(object):
     def display(self):
         """Shows str representation of LinkedList."""
         return str(self)
+
+    def sort(self, key=None, reverse=False):
+        #TODO
+        pass
+
+    def __reversed__(self):
+        #TODO
+        pass
+
+    def reverse(self):
+        #TODO
+        pass

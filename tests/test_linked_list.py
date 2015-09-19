@@ -2,10 +2,23 @@ from __future__ import unicode_literals
 import pytest
 import dtypes.linked_list as ll
 
+#######################################################################
+# Fixtures and testing constants
+#######################################################################
+
 
 @pytest.fixture
 def base_llist():
     return ll.LinkedList([1, 2, 3])
+
+
+@pytest.fixture
+def second_llist():
+    return ll.LinkedList([4, 5, 6])
+
+#######################################################################
+# Instantiation testing
+#######################################################################
 
 
 def test_construct_from_iterable_valid(base_llist):
@@ -40,6 +53,11 @@ def test_construct_from_single_integer_fails():
         ll.LinkedList(2)
 
 
+#######################################################################
+# Tests for special, non-list() like functions
+#######################################################################
+# TODO: Reorganize what's here.
+
 def test_insert_single_value(base_llist):
     base_llist.insert(4)
     assert base_llist.__str__() == "(4, 1, 2, 3)"
@@ -67,3 +85,30 @@ def test_remove_node(base_llist):
 
 def test_display(base_llist):
     assert base_llist.display() == "(1, 2, 3)"
+
+
+#######################################################################
+# Tests for list() like functions
+#######################################################################
+def _getvals(llist_in):
+    """Test helper to get LinkedList vals independent of any class functions"""
+    node = llist_in.head
+    vals = []
+    while True:
+        vals.append(node.val)
+        node = node.next
+        if node is None:
+            break
+    return vals
+
+
+def test_dunder_add(base_llist, second_llist):
+    new_llist = base_llist + second_llist
+    assert _getvals(new_llist) == _getvals(base_llist) + _getvals(second_llist)
+
+
+def test_dunder_iadd(base_llist, second_llist):
+    prev_vals = _getvals(base_llist)
+    base_llist += second_llist
+    assert _getvals(base_llist) == prev_vals + _getvals(second_llist)
+
