@@ -8,13 +8,17 @@ class Node(object):
         self.next = next
 
     def __repr__(self):
+        return "Node(val)"
+
+    def __str__(self):
         """Print representation of node."""
         return "{val}".format(val=self.val)
 
 
 class LinkedList(object):
     """Class for a singly-linked list."""
-    def __init__(self, iterable=()):
+
+    def __init__(self, iterable=(), head=None):
         self._current = None
         self.head = None
         self.length = 0
@@ -22,6 +26,9 @@ class LinkedList(object):
             self.insert(val)
 
     def __repr__(self):
+        return "LinkedList()"
+
+    def __str__(self):
         """Print representation of LinkedList."""
         node = self.head
         output = ""
@@ -36,6 +43,10 @@ class LinkedList(object):
         if self.head is not None:
             self._current = self.head
         return self
+
+    def __next__(self):
+        """For Py 3.x compatibility"""
+        self.next()
 
     def next(self):
         if self._current is None:
