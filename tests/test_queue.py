@@ -20,7 +20,7 @@ invalid_constructor_args = [
 ]
 
 
-@pytest.mark.parametrize("input,deque", valid_constructor_args_dequeue)
+@pytest.mark.parametrize("input, deque", valid_constructor_args_dequeue)
 def test_valid_contructor(input, deque):
     """Test valid constructor using by dequeuing after instantiation"""
     assert Queue(input).dequeue() == deque

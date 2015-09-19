@@ -37,9 +37,10 @@ class LinkedList(object):
         return "({})".format(output.rstrip(' ,'))
 
     def __len__(self):
+        prev = None
         for i, val in enumerate(self):
             prev = i
-        return prev + 1
+        return prev + 1 if prev is not None else 0
 
     def __iter__(self):
         if self.head is not None:
