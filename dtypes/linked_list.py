@@ -22,7 +22,6 @@ class LinkedList(object):
     def __init__(self, iterable=()):
         self._current = None
         self.head = None
-        self.length = 0
         for val in reversed(iterable):
             self.insert(val)
 
@@ -38,6 +37,7 @@ class LinkedList(object):
         return "({})".format(output.rstrip(' ,'))
 
     def __len__(self):
+        # TODO:Rewrite
         return self.length
 
     def __iter__(self):
@@ -61,10 +61,30 @@ class LinkedList(object):
         for node in iter(self):
             yield node.val
 
+    def __list__(self):
+        """Akin to self.__dict__; return a list form representation of LinkedList"""
+        return list(self.itervals())
+
+    def __contains__(self, val):
+        return val in set(self.itervals())
+
     def __add__(self, other):
         """Concatenate two LinkedLists together"""
         sumvals = chain(self.itervals(), other.itervals())
         return LinkedList(list(sumvals))
+
+    def __iadd__(self, other):
+        """Concatenate in-place
+
+        Slightly expensive implementation, but alas, no way to reverse
+        an iterator"""
+        vals = self.__list__()
+        for val in reversed(vals):
+            self.insert(val)
+        return self
+
+    def copy(self):
+        return LinkedList(self.__list__())
 
     def insert(self, val):
         """Insert value at head of LinkedList.
@@ -73,7 +93,6 @@ class LinkedList(object):
             val: the value to add
         """
         self.head = Node(val, self.head)
-        self.length += 1
         return None
 
     def pop(self):
@@ -83,8 +102,15 @@ class LinkedList(object):
         else:
             to_return = self.head
             self.head = to_return.next
-            self.length -= 1
             return to_return.val
+
+    def append(self, val):
+        """Insert an item at end of LinkedList
+
+        This is mildly expensive as n-nodes must be traversed"""
+        for node in iter(self):
+            prev = node
+        prev.next = Node(val)
 
     def size(self):
         """Return current length of LinkedList."""
