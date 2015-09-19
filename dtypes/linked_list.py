@@ -18,15 +18,18 @@ class Node(object):
 class LinkedList(object):
     """Class for a singly-linked list."""
 
-    def __init__(self, iterable=(), head=None):
+    def __init__(self, iterable=()):
         self._current = None
-        self.head = head
+        self.head = None
         self.length = 0
         for val in reversed(iterable):
             self.insert(val)
 
     def __repr__(self):
-        return "LinkedList(head=Node({}))".format(self.head.val)
+        def _get_vals():
+            for node in iter(self):
+                yield node.val
+        return "LinkedList({})".format(list(_get_vals()))
 
     def __str__(self):
         """Print representation of LinkedList."""
