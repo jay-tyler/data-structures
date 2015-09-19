@@ -20,13 +20,13 @@ class LinkedList(object):
 
     def __init__(self, iterable=(), head=None):
         self._current = None
-        self.head = None
+        self.head = head
         self.length = 0
         for val in reversed(iterable):
             self.insert(val)
 
     def __repr__(self):
-        return "LinkedList()"
+        return "LinkedList({})".format(self.head)
 
     def __str__(self):
         """Print representation of LinkedList."""
@@ -106,4 +106,4 @@ class LinkedList(object):
 
     def display(self):
         """Shows representation of LinkedList."""
-        return repr(self)
+        return str(self)
