@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/jay-tyler/data-structures.svg?branch=master)](https://travis-ci.org/jay-tyler/data-structures)
+
+
 #Data Structures
 Implementation of data structures and algorithms in Python. Done as a pedagogical exercise.
 
@@ -119,5 +122,3 @@ The following sort methods are provided:
 * quick_sort package: quisort(list) --> sorted list
 
 See the doc strings for additional implementation details.
-
-[![Build Status](https://travis-ci.org/tpeek/data-structures-1.svg?branch=master)](https://travis-ci.org/tpeek/data-structures-1)
