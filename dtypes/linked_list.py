@@ -17,7 +17,7 @@ class Node(object):
 
 
 class LinkedList(object):
-    """Class for a singly-linked list."""
+    """Class for a singly-linked list without loops."""
 
     def __init__(self, iterable=()):
         self._current = None
@@ -26,7 +26,7 @@ class LinkedList(object):
             self.insert(val)
 
     def __repr__(self):
-        return "LinkedList({})".format(list(self.itervals()))
+        return "LinkedList({})".format(self.__list__())
 
     def __str__(self):
         """Print representation of LinkedList."""
@@ -37,8 +37,9 @@ class LinkedList(object):
         return "({})".format(output.rstrip(' ,'))
 
     def __len__(self):
-        # TODO:Rewrite
-        return self.length
+        for i, val in enumerate(self):
+            prev = i
+        return prev + 1
 
     def __iter__(self):
         if self.head is not None:
@@ -58,11 +59,13 @@ class LinkedList(object):
 
     def itervals(self):
         """Generate alternative iterator that serves each node.val"""
-        for node in iter(self):
+        for node in self:
             yield node.val
 
     def __list__(self):
-        """Akin to self.__dict__; return a list form representation of LinkedList"""
+        """Return a list form representation of LinkedList
+
+        Akin to self.__dict__"""
         return list(self.itervals())
 
     def __contains__(self, val):
@@ -78,15 +81,59 @@ class LinkedList(object):
 
         Slightly expensive implementation, but alas, no way to reverse
         an iterator"""
+        self.extend(other)
+        return self
+
+    def __mul__(self, n):
+        iterable = []
+        for i in range(n):
+            iterable += self.__list__()
+        return LinkedList(iterable)
+
+    def __rmul__(self, n):
+        return self.__mul__(self, n)
+
+    def __imul__(self, n):
+        for i in range(1, n):
+            self.extend(self.__list__())
+        return self
+
+    def __getitem__(self, index):
+        for i, node in enumerate(self):
+            if i == index:
+                return node
+
+    def copy(self):
+        return LinkedList(self.__list__())
+
+    def extend(self, iteratable):
+        """Extend to include iterable
+
+        Slightly expensive implementation, but alas, no way to reverse
+        an iterator"""
         vals = self.__list__()
         for val in reversed(vals):
             self.insert(val)
         return self
 
-    def copy(self):
-        return LinkedList(self.__list__())
+    def count(self, val):
+        count = 0
+        for node in self:
+            if node.val == val:
+                count += 1
+        return count
+
+    def index(self, val):
+        for i, node in enumerate(self):
+            if node.val == val:
+                return i
+
+    def clear(self):
+        self._current = None
+        self.head = None
 
     def insert(self, val):
+        #TODO: Refactor to do insert(position, val)
         """Insert value at head of LinkedList.
 
         args:
@@ -96,6 +143,7 @@ class LinkedList(object):
         return None
 
     def pop(self):
+        # TODO: Implement this so that it more closely matches Pythonic objects
         """Pop the first val off the head and return it."""
         if self.head is None:
             raise IndexError
@@ -108,7 +156,7 @@ class LinkedList(object):
         """Insert an item at end of LinkedList
 
         This is mildly expensive as n-nodes must be traversed"""
-        for node in iter(self):
+        for node in self:
             prev = node
         prev.next = Node(val)
 
