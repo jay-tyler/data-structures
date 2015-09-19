@@ -112,3 +112,9 @@ def test_dunder_iadd(base_llist, second_llist):
     base_llist += second_llist
     assert _getvals(base_llist) == prev_vals + _getvals(second_llist)
 
+
+def test_append(base_llist):
+    prev_vals = _getvals(base_llist) # Returns Python list
+    base_llist.append(5)
+    prev_vals.append(5)
+    assert _getvals(base_llist) == prev_vals
