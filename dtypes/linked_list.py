@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+from itertools import chain
 
 
 class Node(object):
@@ -26,10 +27,7 @@ class LinkedList(object):
             self.insert(val)
 
     def __repr__(self):
-        def _get_vals():
-            for node in iter(self):
-                yield node.val
-        return "LinkedList({})".format(list(_get_vals()))
+        return "LinkedList({})".format(list(self.itervals()))
 
     def __str__(self):
         """Print representation of LinkedList."""
@@ -57,6 +55,16 @@ class LinkedList(object):
         node = self._current
         self._current = self._current.next
         return node
+
+    def itervals(self):
+        """Generate alternative iterator that serves each node.val"""
+        for node in iter(self):
+            yield node.val
+
+    def __add__(self, other):
+        """Concatenate two LinkedLists together"""
+        sumvals = chain(self.itervals(), other.itervals())
+        return LinkedList(list(sumvals))
 
     def insert(self, val):
         """Insert value at head of LinkedList.
