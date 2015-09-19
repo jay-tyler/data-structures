@@ -9,7 +9,7 @@ import dtypes.linked_list as ll
 
 @pytest.fixture
 def base_llist():
-    return ll.LinkedList([1, 2, 3])
+    return ll.LinkedList([1, 2, 3, 5, 3])
 
 
 @pytest.fixture
@@ -91,7 +91,7 @@ def test_display(base_llist):
 # Tests for list() like functions
 #######################################################################
 def _getvals(llist_in):
-    """Test helper to get LinkedList vals independent of any class functions"""
+    """Return LinkedList vals as list"""
     node = llist_in.head
     vals = []
     while True:
@@ -108,13 +108,43 @@ def test_dunder_add(base_llist, second_llist):
 
 
 def test_dunder_iadd(base_llist, second_llist):
-    prev_vals = _getvals(base_llist)
+    as_list = _getvals(base_llist)
     base_llist += second_llist
-    assert _getvals(base_llist) == prev_vals + _getvals(second_llist)
+    as_list += _getvals(second_llist)
+    assert _getvals(base_llist) == as_list
 
 
 def test_append(base_llist):
-    prev_vals = _getvals(base_llist) # Returns Python list
+    as_list = _getvals(base_llist)
     base_llist.append(5)
-    prev_vals.append(5)
-    assert _getvals(base_llist) == prev_vals
+    as_list.append(5)
+    assert _getvals(base_llist) == as_list
+
+
+def test_clear(base_llist):
+    # Note that .clear() doesn't appear as a Py list method until Py3.3
+    base_llist.clear()
+    assert base_llist.head is None
+
+
+def test_dunder_contains_true(base_llist):
+    as_list = _getvals(base_llist)
+
+    assert (2 in base_llist) == (2 in as_list)
+    assert (2 in base_llist) == True
+
+
+def test_dunder_contains_false(base_llist):
+    as_list = _getvals(base_llist)
+
+    assert (55 in base_llist) == (55 in as_list)
+    assert (55 in base_llist) == False
+
+
+def test_copy(base_llist):
+    as_list = _getvals(base_llist)
+    copy_of_llist = base_llist.copy()
+    assert id(copy_of_llist) != id(base_llist)
+    assert _getvals(copy_of_llist) == as_list
+
+
