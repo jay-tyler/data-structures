@@ -11,24 +11,24 @@ def base_stack():
 
 def test_construct_from_iterable_valid(base_stack):
     expected_output = "(1, 2, 3)"
-    assert base_stack.__repr__() == expected_output
+    assert base_stack.__str__() == expected_output
 
 
 def test_construct_from_nested_iterable_valid():
     arg = ([1, 2, 3], 'string')
     expected_output = "([1, 2, 3], u'string')"
-    assert Stack(arg).__repr__() == expected_output
+    assert Stack(arg).__str__() == expected_output
 
 
 def test_construct_from_string_valid():
     arg = "string"
     expected_output = "(u's', u't', u'r', u'i', u'n', u'g')"
-    assert Stack(arg).__repr__() == expected_output
+    assert Stack(arg).__str__() == expected_output
 
 
 def test_construct_empty_valid():
     expected_output = "()"
-    assert Stack().__repr__() == expected_output
+    assert Stack().__str__() == expected_output
 
 
 def test_construct_from_none_fails():
@@ -43,12 +43,12 @@ def test_construct_from_single_integer_fails():
 
 def test_push(base_stack):
     base_stack.push(4)
-    assert base_stack.__repr__() == "(4, 1, 2, 3)"
+    assert base_stack.__str__() == "(4, 1, 2, 3)"
 
 
 def test_pop(base_stack):
     assert base_stack.pop() == 1
-    assert base_stack.__repr__() == "(2, 3)"
+    assert base_stack.__str__() == "(2, 3)"
 
 
 def test_pop_after_multi_push(base_stack):

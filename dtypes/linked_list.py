@@ -8,7 +8,7 @@ class Node(object):
         self.next = next
 
     def __repr__(self):
-        return "Node(val)"
+        return "Node({})".format(self.val)
 
     def __str__(self):
         """Print representation of node."""
@@ -26,7 +26,7 @@ class LinkedList(object):
             self.insert(val)
 
     def __repr__(self):
-        return "LinkedList({})".format(self.head)
+        return "LinkedList(head=Node({}))".format(self.head.val)
 
     def __str__(self):
         """Print representation of LinkedList."""
@@ -105,5 +105,5 @@ class LinkedList(object):
                 return None
 
     def display(self):
-        """Shows representation of LinkedList."""
+        """Shows str representation of LinkedList."""
         return str(self)

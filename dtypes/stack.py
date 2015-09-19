@@ -9,8 +9,8 @@ class Stack():
         self.other = LinkedList()
         self.other.__init__(iterable)
 
-    def __repr__(self):
-        return repr(self.other)
+    def __str__(self):
+        return str(self.other)
 
     def push(self, value):
         """Add a value to the head of the stack.
