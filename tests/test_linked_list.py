@@ -1,20 +1,24 @@
 from __future__ import unicode_literals
 import pytest
+import sys
 from dtypes.linked_list import LinkedList, Node
 
 #######################################################################
 # Fixtures, helpers, and testing constants
 #######################################################################
+INSTANTIATION_ARG_1 = [1, 2, 3, 5, 3]
+INSTANTIATION_ARG_2 = [4, 5, 6]
 
 
 @pytest.fixture
-def base_llist():
-    return LinkedList([1, 2, 3, 5, 3])
+def first_llist():
+    return LinkedList(INSTANTIATION_ARG_1)
 
 
 @pytest.fixture
 def second_llist():
-    return LinkedList([4, 5, 6])
+    return LinkedList(INSTANTIATION_ARG_2)
+
 
 def _getvals(llist_in):
     """Return LinkedList vals as list"""
@@ -26,6 +30,7 @@ def _getvals(llist_in):
         if node is None:
             break
     return vals
+
 
 def _makestr(llist_in):
     """Return a string from a list or LinkedList that should be equivalent to LinkedList.__str__()
@@ -45,9 +50,9 @@ def _makestr(llist_in):
 #######################################################################
 
 
-def test_construct_from_iterable_valid(base_llist):
-    expected_output = _makestr(base_llist)
-    assert base_llist.display() == expected_output
+def test_construct_from_iterable_valid(first_llist):
+    expected_output = _makestr(first_llist)
+    assert first_llist.display() == expected_output
 
 
 def test_construct_from_nested_iterable_valid():
@@ -82,40 +87,39 @@ def test_construct_from_single_integer_fails():
 #######################################################################
 # TODO: Reorganize what's here.
 
-def test_insert_single_value(base_llist):
-    as_list = _getvals(base_llist)
-    base_llist.insert(4)
+def test_insert_single_value(first_llist):
+    as_list = _getvals(first_llist)
+    first_llist.insert(4)
     as_list.insert(0, 4)
-    assert _getvals(base_llist) == as_list
+    assert _getvals(first_llist) == as_list
 
 
-def test_pop(base_llist):
-    as_list = _getvals(base_llist)
-    as_list.pop(0
-        )
-    assert base_llist.pop() == 1
-    assert base_llist.__str__() == _makestr(as_list)
+def test_pop(first_llist):
+    as_list = _getvals(first_llist)
+    as_list.pop(0)
+    assert first_llist.pop() == 1
+    assert first_llist.__str__() == _makestr(as_list)
 
 
-def test_size(base_llist):
-    assert base_llist.size() == len(_getvals(base_llist))
+def test_size(first_llist):
+    assert first_llist.size() == len(_getvals(first_llist))
 
 
-def test_search_val(base_llist):
-    searched_node = base_llist.search(2)
+def test_search_val(first_llist):
+    searched_node = first_llist.search(2)
     assert isinstance(searched_node, Node)
     assert searched_node.val == 2
 
 
-def test_remove_node(base_llist):
-    as_list = _getvals(base_llist)
+def test_remove_node(first_llist):
+    as_list = _getvals(first_llist)
     as_list.remove(2)
-    base_llist.remove(base_llist.search(2))
-    assert base_llist.__str__() == str(tuple(as_list))
+    first_llist.remove(first_llist.search(2))
+    assert first_llist.__str__() == str(tuple(as_list))
 
 
-def test_display(base_llist):
-    assert base_llist.display() == _makestr(base_llist)
+def test_display(first_llist):
+    assert first_llist.display() == _makestr(first_llist)
 
 
 #######################################################################
@@ -123,48 +127,47 @@ def test_display(base_llist):
 #######################################################################
 
 
-def test_dunder_add(base_llist, second_llist):
-    new_llist = base_llist + second_llist
-    assert _getvals(new_llist) == _getvals(base_llist) + _getvals(second_llist)
+def test_dunder_add(first_llist, second_llist):
+    new_llist = first_llist + second_llist
+    assert _getvals(new_llist) == _getvals(first_llist) + _getvals(second_llist)
 
 
-def test_dunder_iadd(base_llist, second_llist):
-    as_list = _getvals(base_llist)
-    base_llist += second_llist
+def test_dunder_iadd(first_llist, second_llist):
+    as_list = _getvals(first_llist)
+    first_llist += second_llist
     as_list += _getvals(second_llist)
-    assert _getvals(base_llist) == as_list
+    assert _getvals(first_llist) == as_list
 
 
-def test_append(base_llist):
-    as_list = _getvals(base_llist)
-    base_llist.append(5)
+def test_append(first_llist):
+    as_list = _getvals(first_llist)
+    first_llist.append(5)
     as_list.append(5)
-    assert _getvals(base_llist) == as_list
+    assert _getvals(first_llist) == as_list
 
 
-def test_clear(base_llist):
+def test_clear(first_llist):
     # Note that .clear() doesn't appear as a Py list method until Py3.3
-    base_llist.clear()
-    assert base_llist.head is None
+    first_llist.clear()
+    assert first_llist.head is None
 
 
-def test_dunder_contains_true(base_llist):
-    as_list = _getvals(base_llist)
-
-    assert (2 in base_llist) == (2 in as_list)
-    assert (2 in base_llist) == True
-
-
-def test_dunder_contains_false(base_llist):
-    as_list = _getvals(base_llist)
-
-    assert (55 in base_llist) == (55 in as_list)
-    assert (55 in base_llist) == False
+def test_dunder_contains_true(first_llist):
+    as_list = _getvals(first_llist)
+    expected_val = INSTANTIATION_ARG_1[1]
+    assert (expected_val in first_llist) == (expected_val in as_list)
+    assert (expected_val in first_llist) is True
 
 
-def test_copy(base_llist):
-    as_list = _getvals(base_llist)
-    copy_of_llist = base_llist.copy()
-    assert id(copy_of_llist) != id(base_llist)
+def test_dunder_contains_false(first_llist):
+    as_list = _getvals(first_llist)
+    unexpected_val = sys.maxint
+    assert (unexpected_val in first_llist) == (unexpected_val in as_list)
+    assert (unexpected_val in first_llist) is False
+
+
+def test_copy(first_llist):
+    as_list = _getvals(first_llist)
+    copy_of_llist = first_llist.copy()
+    assert id(copy_of_llist) != id(first_llist)
     assert _getvals(copy_of_llist) == as_list
-
