@@ -145,15 +145,16 @@ class LinkedList(object):
         self.head = Node(val, self.head)
         return None
 
-    def pop(self):
+    def pop(self, index=0):
         # TODO: Implement this so that it more closely matches Pythonic objects
         """Pop the first val off the head and return it."""
         if self.head is None:
             raise IndexError
         else:
-            to_return = self.head
+            to_return = self[index]
+        if index == 0:
             self.head = to_return.next
-            return to_return.val
+        return to_return.val
 
     def append(self, val):
         """Insert an item at end of LinkedList
