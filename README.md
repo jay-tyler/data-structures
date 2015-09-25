@@ -2,7 +2,12 @@
 
 
 #Data Structures
-Implementation of data structures and algorithms in Python. Done as a pedagogical exercise.
+Implementation of data structures and algorithms in Python. Done as a learning exercise
+with two goals:
+
+1. To gain familiarity with standard algorithms and datatypes
+2. To make these datatypes as close in interface to actual Python datatypes; e.g.
+a LinkedList should have nearly all the methods expected of a standard Python list
 
 ##LinkedList
 The LinkedList class is composed of a Node base class.
