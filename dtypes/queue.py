@@ -7,7 +7,7 @@ class Queue(LinkedList):
 
     def __init__(self, iterable=()):
         super(Queue, self).__init__(iterable)
-        self.tail = None
+        self.tail = self[-1] if len(self) > 0 else None
 
     #TODO replace __repr__ and __str__
     

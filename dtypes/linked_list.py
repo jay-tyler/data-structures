@@ -103,6 +103,8 @@ class LinkedList(object):
         for i, node in enumerate(self):
             if i == index:
                 return node
+            elif not node.next:
+                return node if index == -1 else None
 
     def __delitem__(self, index):
         #TODO
