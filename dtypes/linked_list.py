@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from itertools import chain
 
@@ -107,8 +108,7 @@ class LinkedList(object):
                 return node if index == -1 else None
 
     def __delitem__(self, index):
-        #TODO
-        pass
+        pop(index)
 
     def copy(self):
         return LinkedList(self.__list__())
