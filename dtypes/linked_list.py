@@ -146,7 +146,6 @@ class LinkedList(object):
         return None
 
     def pop(self, index=0):
-        # TODO: Implement this so that it more closely matches Pythonic objects
         """Pop the first val off the head and return it."""
         if self.head is None:
             raise IndexError
