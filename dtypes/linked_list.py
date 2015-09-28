@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from itertools import chain
 
@@ -107,8 +108,7 @@ class LinkedList(object):
                 return node if index == -1 else None
 
     def __delitem__(self, index):
-        #TODO
-        pass
+        pop(index)
 
     def copy(self):
         return LinkedList(self.__list__())
@@ -145,15 +145,15 @@ class LinkedList(object):
         self.head = Node(val, self.head)
         return None
 
-    def pop(self):
-        # TODO: Implement this so that it more closely matches Pythonic objects
+    def pop(self, index=0):
         """Pop the first val off the head and return it."""
         if self.head is None:
             raise IndexError
         else:
-            to_return = self.head
+            to_return = self[index]
+        if index == 0:
             self.head = to_return.next
-            return to_return.val
+        return to_return.val
 
     def append(self, val):
         """Insert an item at end of LinkedList
