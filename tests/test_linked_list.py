@@ -111,6 +111,21 @@ def test_pop_index_2(first_llist):
     assert first_llist.__str__() == _makestr(as_list)
 
 
+def test_pop_index_last(first_llist):
+    length = len(INSTANTIATION_ARG_1)
+    as_list = _getvals(first_llist)
+    expected_pop = as_list.pop(length - 1)
+    assert first_llist.pop(length - 1) == expected_pop
+    assert first_llist.__str__() == _makestr(as_list)
+
+
+def test_pop_index_last_as_alias_minus_one(first_llist):
+    as_list = _getvals(first_llist)
+    expected_pop = as_list.pop(-1)
+    assert first_llist.pop(-1) == expected_pop
+    assert first_llist.__str__() == _makestr(as_list)
+
+
 def test_size(first_llist):
     assert first_llist.size() == len(_getvals(first_llist))
 
