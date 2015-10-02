@@ -140,7 +140,7 @@ def test_size_full(first_llist):
     assert first_llist.size() == len(_getvals(first_llist))
 
 
-def test_size_one(first_llist):
+def test_size_one(one_item_llist):
     assert one_item_llist.size() == 1
 
 

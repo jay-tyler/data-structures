@@ -100,7 +100,7 @@ class LinkedList(object):
             self.extend(self.__list__())
         return self
 
-    def __getitem__(self, index):
+    def __getitem__(self, index):  # Py list __getitem__ is generalizable to any negative integer. Currently supporting only -1 indexing.
         for i, node in enumerate(self):
             if i == index:
                 return node
@@ -145,14 +145,22 @@ class LinkedList(object):
         self.head = Node(val, self.head)
         return None
 
-    def pop(self, index=0):
+    def pop(self, index=0): # TODO: index for list is generalizable to any negative integer; currently supporting only -1
         """Pop the first val off the head and return it."""
         if self.head is None:
             raise IndexError
-        else:
-            to_return = self[index]
         if index == 0:
+            to_return = self.head
             self.head = to_return.next
+        elif index != -1:
+            node_before = self[index - 1]
+            print node_before
+            to_return = node_before.next
+            node_before.next = node_before.next.next
+        elif index == -1:
+            node_before = self[len(self) - 2]  # TODO: This is O(n**2) currently; refactor to linear time
+            to_return = node_before.next
+            node_before.next = node_before.nbext.next
         return to_return.val
 
     def append(self, val):
