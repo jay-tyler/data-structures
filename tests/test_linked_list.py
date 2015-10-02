@@ -9,7 +9,7 @@ from dtypes.linked_list import LinkedList, Node
 #######################################################################
 INSTANTIATION_ARG_1 = [1, 2, 3, 5, 3]
 INSTANTIATION_ARG_2 = [4, 5, 6]
-
+INSTANTIATION_ARG_3 = [1]
 
 @pytest.fixture
 def first_llist():
@@ -19,6 +19,16 @@ def first_llist():
 @pytest.fixture
 def second_llist():
     return LinkedList(INSTANTIATION_ARG_2)
+
+
+@pytest.fixture
+def one_item_llist():
+    return LinkedList(INSTANTIATION_ARG_3)
+
+
+@pytest.fixture
+def empty_llist():
+    return LinkedList()
 
 
 def _getvals(llist_in):
@@ -101,7 +111,7 @@ def test_pop_index_0(first_llist):
     as_list = _getvals(first_llist)
     expected_pop = as_list.pop(0)
     assert first_llist.pop() == expected_pop
-    assert first_llist.__str__() == _makestr(as_list)
+    assert first_llist.__str__() == _makestr(as_list)  # This line will break if __str__ spec changes; use testing helpers and replace all instances of this pattern
 
 
 def test_pop_index_2(first_llist):
@@ -126,8 +136,28 @@ def test_pop_index_last_as_alias_minus_one(first_llist):
     assert first_llist.__str__() == _makestr(as_list)
 
 
-def test_size(first_llist):
+def test_size_full(first_llist):
     assert first_llist.size() == len(_getvals(first_llist))
+
+
+def test_size_one(first_llist):
+    assert one_item_llist.size() == 1
+
+
+def test_size_empty(empty_llist):
+    assert empty_llist.size() == 0
+
+
+def test_len_full(first_llist):
+    assert len(first_llist) == len(_getvals(first_llist))
+
+
+def test_len_one(one_item_llist):
+    assert len(one_item_llist) == 1
+
+
+def test_len_empty(empty_llist):
+    assert len(empty_llist) == 0
 
 
 def test_search_val(first_llist):

@@ -20,7 +20,7 @@ class Node(object):
 class LinkedList(object):
     """Class for a singly-linked list without loops."""
 
-    def __init__(self, iterable=()):
+    def __init__(self, iterable=()):  # TESTED
         self._current = None
         self.head = None
         for val in reversed(iterable):
@@ -37,7 +37,7 @@ class LinkedList(object):
             output += "{!r}, ".format(node.val)
         return "({})".format(output.rstrip(' ,'))
 
-    def __len__(self):
+    def __len__(self):  # TESTED
         prev = None
         for i, val in enumerate(self):
             prev = i
@@ -163,7 +163,7 @@ class LinkedList(object):
             prev = node
         prev.next = Node(val)
 
-    def size(self):
+    def size(self):  # TESTED
         """Return current length of LinkedList."""
         return len(self)
 
