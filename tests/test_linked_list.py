@@ -3,6 +3,7 @@ import pytest
 import sys
 from dtypes.linked_list import LinkedList, Node
 
+
 #######################################################################
 # Fixtures, helpers, and testing constants
 #######################################################################
@@ -44,6 +45,7 @@ def _makestr(llist_in):
         return str(tuple(_getvals(llist_in)))
     else:
         return str(tuple(llist_in))
+
 
 #######################################################################
 # Instantiation testing
@@ -87,6 +89,7 @@ def test_construct_from_single_integer_fails():
 #######################################################################
 # TODO: Reorganize what's here.
 
+
 def test_insert_single_value(first_llist):
     as_list = _getvals(first_llist)
     first_llist.insert(4)
@@ -94,10 +97,17 @@ def test_insert_single_value(first_llist):
     assert _getvals(first_llist) == as_list
 
 
-def test_pop(first_llist):
+def test_pop_index_0(first_llist):
     as_list = _getvals(first_llist)
-    as_list.pop(0)
-    assert first_llist.pop() == 1
+    expected_pop = as_list.pop(0)
+    assert first_llist.pop() == expected_pop
+    assert first_llist.__str__() == _makestr(as_list)
+
+
+def test_pop_index_2(first_llist):
+    as_list = _getvals(first_llist)
+    expected_pop = as_list.pop(2)
+    assert first_llist.pop(2) == expected_pop
     assert first_llist.__str__() == _makestr(as_list)
 
 
